@@ -1,0 +1,72 @@
+<style> 
+  input[type=text] {
+    width: 100%;
+    padding: 6px 10px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    background-color: #3CBC8D;
+    color: rgb(122, 29, 13);
+  }
+  </style>
+<html>
+  <div class="row">
+    <div class="col-12 text-white">
+      <input type="text" value="PARAMETRAGE DES LANGUES (FRANCAIS/ARABE)" style="text-align:center;"  class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" readonly>
+    </div>
+</div> 
+  <p></p>
+  <div class="row">
+    <div class="col-4 text-white">  
+    </div>
+    <div class="col-4 text-white">
+      <ng-select [items]="CategorieList" name="CATEGORIE" placeholder="Recherche Catégorie" bindLabel="CATEGORIE" [virtualScroll]="true"  [(ngModel)]="CATEGORIE" (clear) = "vider()" (change)="choixcategorie(CATEGORIE)">
+        <ng-template ng-label-tmp ng-option-tmp let-item="item">
+          {{item.CATEGORIE}}
+      </ng-template>
+      </ng-select>
+    </div>
+    <div class="col-4 text-white">
+    </div>
+  </div>
+  <div class="container-fluid" >
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Mise à jour de la langue</h5>
+            <button type="button" class="btn-close" (click)="closeClick()" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <app-add_edit_arabe *ngIf="modopen" [arabe]="this.arabe"> 
+            </app-add_edit_arabe>
+          </div>
+        </div>
+      </div>
+    </div>
+      <div class="container mt-3">
+        <table class="table table-hover" id="table"  data-show-header="true" data-pagination="true"> 
+            <thead>
+                <tr>
+                    <th>GESPERS</th>
+                    <th>FRANCAIS (M)</th>
+                    <th>ARABE (M)</th>
+                    <th>FRANCAIS (F)</th>
+                    <th>ARABE (F)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let dataItem of arabeList | paginate: { itemsPerPage: 8, currentPage: p }">
+                  <td>{{dataItem.FRANCAIS_GESPERS.replaceAll("_", "'")}}</td>
+                  <td>{{dataItem.FRANCAIS_M.replaceAll("_", "'")}}</td>
+                  <td>{{dataItem.ARABE_M}}</td>
+                  <td>{{dataItem.FRANCAIS_F.replaceAll("_", "'")}}</td>
+                  <td>{{dataItem.ARABE_F}}</td>
+                  <td><i class="fas fa-edit" style="color:#5aa1cf" (click)="Editarabe(dataItem)" data-bs-toggle="modal"  data-bs-target="#exampleModal"></i></td>
+                </tr>
+              </tbody>
+        </table>
+      </div>
+       <p class="text-center"><pagination-controls nextLabel="Suivant" previousLabel="Précedent" (pageChange)="p = $event"></pagination-controls></p> 
+</div>
+</html>

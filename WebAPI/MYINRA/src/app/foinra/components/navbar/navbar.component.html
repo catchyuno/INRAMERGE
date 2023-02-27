@@ -1,0 +1,45 @@
+<!--Navbar-->
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark unique-color darken-7">
+
+  <!-- Navbar brand -->
+  <mdb-navbar-brand><a class="navbar-brand" [routerLink]="['']" >FOINRA</a></mdb-navbar-brand>
+
+  <!-- Collapsible content -->
+
+<links>
+      <!-- Links -->
+      <ul *ngIf="this.authService.loggedIn()" class="navbar-nav mr-auto">
+          <!-- Dropdown -->
+          <li class="nav-item " [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" >
+            <a type="button" class="nav-link waves-light" [routerLink]="['factures']" mdbWavesEffect>
+            Factures</a>
+        </li>
+          <li *ngIf="this.authService.hasrole(1) || this.authService.hasrole(5)" class="nav-item " [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" >
+            <a type="button" class="nav-link waves-light" [routerLink]="['Marche']" mdbWavesEffect>
+            Gestion des Marchés/BC</a>
+        </li>
+        <li *ngIf="this.authService.hasrole(5) " class="nav-item " [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" >
+            <a type="button" class="nav-link waves-light" [routerLink]="['usermng']" mdbWavesEffect>
+            Gestion d'utilisateur</a>
+        </li>
+
+      </ul>
+
+
+<ul class="navbar-nav ml-auto">
+  <li *ngIf="(this.authService.loggedIn())&& this.authService.user!=null" class="nav-item dropdown" style="padding-top:4px!important;" dropdown [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+    <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect><mdb-icon fas icon="user"></mdb-icon>{{this.authService.user.sub}}<span class="caret"></span></a>
+    <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+            <a class="dropdown-item waves-light" [routerLink]="['user']" mdbWavesEffect >Profil</a>
+        <a class="dropdown-item waves-light" mdbWavesEffect (click)="logOut()" >Se déconnectez</a>
+    </div>
+  </li>
+  <li style="padding-top:4px!important;" class="nav-item"><a type="button" matTooltip="Manuel"  class="nav-link waves-light" (click)="manuel()" mdbWavesEffect><span class="material-icons">auto_stories</span></a></li>
+</ul>
+</links>
+
+    <!-- Links -->
+  <!-- Collapsible content -->
+
+</mdb-navbar>
+<!--/.Navbar-->

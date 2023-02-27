@@ -1,0 +1,54 @@
+<style> 
+  input[type=text] {
+    width: 100%;
+    padding: 6px 10px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    background-color: #3CBC8D;
+    color: rgb(122, 29, 13);
+  }
+  </style>
+<html>
+  <div class="row">
+    <div class="col-12 text-white">
+      <input type="text" value="APERCU DES DOCUMENTS ADMINISTRATIFS" style="text-align:center;"  class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" readonly>
+    </div>
+</div> 
+  <p></p>
+  <div class="row">
+    <div class="col-4 text-white">  
+    </div>
+    <div class="col-4 text-white">
+      <ng-select [items]="CategoriList" (clear)="refreshdocumentList()" name="CATEGORIE" placeholder="Recherche Catégorie" bindLabel="CATEGORIE" [virtualScroll]="true" [(ngModel)]="CATEGORIE" (change)="choixcategorie(categorie)">
+          <ng-template ng-label-tmp ng-option-tmp let-item="item">
+            {{item.CATEGORIE}}
+        </ng-template>
+        </ng-select> 
+    </div>
+  <div class="col-4 text-white">
+  </div>
+</div> 
+  <div class="container-fluid" >
+      <div class="container mt-3">
+        <table class="table table-hover" id="table"  data-show-header="true" data-pagination="true"> 
+            <thead>
+                <tr>
+                    <th>CATEGORIE</th>
+                    <th>INTITULE</th>
+                    <th>FICHIER</th>
+                    <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let dataItem of documentList | paginate: { itemsPerPage: 8, currentPage: p }">
+                  <td>{{dataItem.CATEGORIE}}</td>
+                  <td>{{dataItem.INTITULE.replaceAll("_", "'")}}</td>
+                  <td><i class="fas fa-download" style="color:#00cc6a" (click)="downloadfile(dataItem)"></i></td>
+                </tr>
+              </tbody>
+        </table>
+      </div>
+       <p class="text-center"><pagination-controls nextLabel="Suivant" previousLabel="Précedent" (pageChange)="p = $event"></pagination-controls></p> 
+</div>
+</html>

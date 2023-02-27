@@ -1,0 +1,50 @@
+<h3 mat-dialog-title class="form-row">
+  <p >Historique facture id : {{facture?.idFacture}}</p>
+</h3>
+<mat-dialog-content>
+  <div class="form-row">
+      <table class="col-md-12" mdbTable>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Opération</th>
+            <th>Confirmé/Rejeté</th>
+            <th>Commentaire</th>
+            <th>Date </th>
+            <th>Jour passé</th>
+            <th>Service/Unité</th>
+            <th>Fichier</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr mdbTableCol *ngFor="let i of trajets | paginate:{ itemsPerPage:6,currentPage:p }">
+            <td><b>{{i.etape}}</b></td>
+            <td>{{i.op}} </td>
+            <td>{{i.type?'Confirmé':'Rejeté'}} </td>
+            <td>{{i.commentaire}} </td>
+            <td style="word-break: keep-all!important;">{{tomoment(i.dateFait)}}</td>
+            <td>{{i.dureePrec}} </td>
+            <td>{{i.nomServ}}</td>
+            <td><button *ngIf="i.fichier!=null" mat-icon-button style="margin-top:-8px" matTooltip="Télécharger le fichier"  (click)="getfile(i)" color="secondary">
+              <mat-icon>get_app</mat-icon>
+          </button></td>
+          </tr>
+        </tbody>
+
+      </table>
+  </div>
+
+</mat-dialog-content>
+<div class="row">
+  <div class="col-md-5">
+    <p>sejour facture : {{sums.sejSoc}} | unité : {{sums.sejUnite}} | TP : {{sums.sejTP}} | global: {{sums.sejT}}</p>
+  </div>
+  <div class=" col-md-5">
+    <pagination-controls (pageChange)="p = $event" previousLabel='Precedent' nextLabel='Suivant' [responsive]='true'></pagination-controls>
+  </div>
+  <div class="col-md-2"><button *ngIf="excele" mat-icon-button size="sm" color="accent" (click)="excel()" class="text-right"><mat-icon>description</mat-icon></button></div>
+  <div class="col-md-2 offset-md-10">
+    <button type="button"   (click)="cancel()" mdbBtn size="sm" color="danger" mdbWavesEffect>fermer</button>
+  </div>
+</div>
+

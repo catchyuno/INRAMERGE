@@ -1,0 +1,62 @@
+<form>
+  <!-- <div class="row">
+    <div class="col-5 text-white">
+        <div class="input-group input-group-sm mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-sm">DDP</span>
+            <input type="text" [(ngModel)]="DDP" name="DDP" style="text-align:center;" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" readonly>
+        </div>
+    </div>
+    <div class="col-7 text-white">
+        <div class="input-group input-group-sm mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-sm">NOM ET PRENOM</span>
+            <input type="text" name="NOM_PRENOM" [(ngModel)]="NOM_PRENOM" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" readonly>
+        </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-5 text-white">
+        <div class="input-group input-group-sm mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-sm">DATE</span>
+            <input type="text" name="DATE" style="text-align:center;" [ngModel]="DATE | date:'dd/MM/yyyy'" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" readonly>
+        </div>
+    </div>
+    <div class="col-3 text-white">
+      <select class="form-select form-select-sm" (change)="refreshRevenuList(ANNEE)" [(ngModel)]="ANNEE" name="ANNEE" aria-label=".form-select-sm example">
+        <option *ngFor="let annee of AnneeList" [value]="annee.ANNEE">
+          {{annee.ANNEE}}
+        </option>
+      </select>
+    </div> -->
+    <!-- <div class="col-4 text-white">
+      <select class="form-select form-select-sm" [(ngModel)]="PRIME" name="PRIME" aria-label=".form-select-sm example">
+        <option *ngFor="let prime of PrimeList" [value]="prime.PRIME">
+          {{prime.PRIME}}
+        </option>
+      </select>
+    </div> -->
+  <!-- </div>
+  <div class="row"> -->
+    <!-- <div class="col-5 text-white">
+        <div class="input-group input-group-sm mb-3">
+          <select class="form-select form-select-sm" [(ngModel)]="TYPE" name="TYPE" aria-label=".form-select-sm example">
+            <option value="SANS CREDIT" selected>SANS CREDIT</option>
+            <option value="AVEC CREDIT">AVEC CREDIT</option>
+          </select>
+        </div>
+    </div> -->
+    <!-- <div class="col-7 text-white">
+      <div class="input-group input-group-sm mb-3">
+          <button (click)="addEtatRevenu()" class="btn btn-primary">
+          VALIDER LA DEMANDE
+      </button>
+      </div>
+    </div>
+  </div>
+  <ngx-spinner
+  bdColor="rgba(255,255,255,0.8)"
+  size=small
+
+  template="<img src='https://media.giphy.com/media/jAYUbVXgESSti/giphy.gif' />"
+>
+</ngx-spinner> -->
+</form>

@@ -1,0 +1,69 @@
+<style> 
+  input[type=text] {
+    width: 100%;
+    padding: 6px 10px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    background-color: #3CBC8D;
+    color: rgb(122, 29, 13);
+  }
+  </style>
+<html>
+  <div class="row">
+    <div class="col-12 text-white">
+      <input type="text" value="AFFECTATION DES CODES BANQUES" style="text-align:center;"  class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" readonly>
+    </div>
+</div> 
+  <p></p>
+  <div class="row">
+  <div class="col-3 text-white">  
+  </div>
+  <div class="col-6 text-white">
+    <ng-select [items]="BanqueList" name="banque" placeholder="Recherche Banque" (clear)="refreshCodeBanqueList()" bindLabel="BANQUE_FR" [virtualScroll]="true" [(ngModel)]="banque" (change)="choixbanque()">
+      <ng-template ng-label-tmp ng-option-tmp let-item="item">
+        {{item.BANQUE_FR.replaceAll("_","'")}}
+    </ng-template>
+    </ng-select>
+  </div>
+<div class="col-3 text-white">
+</div>
+</div> 
+  <div class="container-fluid" >
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Mise à jour des codes (RIB) des banques</h5>
+            <button type="button" class="btn-close" (click)="closeClick()" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <app-add_edit_banque_code *ngIf="modopen" [banque]="this.banque"> 
+            </app-add_edit_banque_code>
+          </div>
+        </div>
+      </div>
+    </div>
+      <div class="container mt-3">
+        <table class="table table-hover" id="table"  data-show-header="true" data-pagination="true"> 
+            <thead>
+                <tr>
+                    <th>BANQUE</th>
+                    <th>البنك</th>
+                    <th>CODE</th>
+                    <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let dataItem of CodeBanqueList | paginate: { itemsPerPage: 8, currentPage: p }">
+                  <td>{{dataItem.BANQUE_FR.replaceAll("_", "'")}}</td>
+                  <td>{{dataItem.BANQUE_AR}}</td>
+                  <td>{{dataItem.CODE}}</td>
+                  <td><i class="fas fa-edit" style="color:#5aa1cf" (click)="EditCodeBanque(dataItem)" data-bs-toggle="modal"  data-bs-target="#exampleModal"></i></td>
+                </tr>
+              </tbody>
+        </table> 
+      </div>
+      <p class="text-center"><pagination-controls nextLabel="Suivant" previousLabel="Précedent" (pageChange)="p = $event"></pagination-controls></p>
+    </div>
+</html>

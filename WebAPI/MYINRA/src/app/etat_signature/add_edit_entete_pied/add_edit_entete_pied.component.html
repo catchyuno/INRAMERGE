@@ -1,0 +1,16 @@
+<form>
+  <div class="row">
+    <div class="col-6 text-white">
+      <div class="input-group input-group-sm mb-3">
+      <span class="input-group-text" id="inputGroup-sizing-sm">Entete</span>  -  <i class="fas fa-download" style="color:#00cc6a" (click)="downloadEntete()"></i>
+      <input type="file" id="uploadEntete" aria-describedby="inputGroup-sizing-sm" name="uploadEntete" accept="image/jpeg" (change)="uploadEntete($event)">  
+    </div>
+    </div>
+    <div class="col-6 text-white"> 
+      <div class="input-group input-group-sm mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-sm">Pied</span>  -  <i class="fas fa-download" style="color:#00cc6a" (click)="downloadPied()"></i>
+        <input type="file" id="uploadPied" name="uploadPied" accept="image/jpeg" (change)="uploadPied($event)">    
+      </div>
+    </div>
+  </div>
+</form>

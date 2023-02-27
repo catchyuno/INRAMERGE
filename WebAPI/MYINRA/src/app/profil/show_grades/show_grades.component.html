@@ -1,0 +1,24 @@
+<html>
+      <div class="container mt-3">
+        <table class="table table-hover" id="table"  data-show-header="true"> 
+            <thead>
+                <tr>
+                    <th>DATE</th>
+                    <th>GRADE</th>
+                    <th>ECHELLE</th>
+                    <th>ECHELON</th>
+                 </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let dataItem of gradeList | paginate: { id:'grade', itemsPerPage: 8, currentPage: pg }">
+                  <td>{{dataItem.DEFFET | date:'dd/MM/yyyy'}}</td>
+                  <td>{{dataItem.LIBGRADE.toUpperCase()}}</td>
+                  <td>{{dataItem.ECHELLE}}</td>
+                  <td>{{dataItem.ECHELON}}</td>
+                </tr>
+              </tbody>
+        </table>
+        <p class="text-center"><pagination-controls id="grade" nextLabel="Suivant" previousLabel="Précedent" (pageChange)="pg = $event"></pagination-controls></p>
+      </div>
+ 
+</html>

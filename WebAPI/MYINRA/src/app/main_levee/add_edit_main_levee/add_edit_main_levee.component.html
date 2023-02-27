@@ -1,0 +1,53 @@
+<form>
+  <div class="row">
+    <div class="col-3 text-white">
+      <div class="input-group input-group-sm mb-3">
+          <span class="input-group-text" id="inputGroup-sizing-sm">DATE</span>
+          <input type="text" name="DATE" style="text-align:center;" [ngModel]="DATE | date:'dd/MM/yyyy'" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" readonly>
+      </div>
+  </div>
+    <div class="col-3 text-white">
+        <div class="input-group input-group-sm mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-sm">DDP</span>
+            <input type="text" [(ngModel)]="DDP" name="DDP" style="text-align:center;" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" readonly>
+        </div>
+    </div>
+    <div class="col-6 text-white">
+        <div class="input-group input-group-sm mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-sm">NOM ET PRENOM</span>
+            <input type="text" name="NOM_PRENOM"  style="text-align:center;" [(ngModel)]="NOM_PRENOM" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" readonly>
+        </div>
+    </div>
+  </div> 
+  <div class="row">
+    <div class="col-8 text-white">
+        <div class="input-group input-group-sm mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-sm">BANQUE</span>
+            <input type="text" name="BANQUE" style="text-align:center;" [ngModel]="BANQUE" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" readonly>
+        </div>  
+    </div>
+    <div class="col-4 text-white">
+      <div class="input-group input-group-sm mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-sm">RIB</span>
+        <input type="text" name="RIB" style="text-align:center;" [ngModel]="RIB" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" readonly>
+      </div>
+    </div>
+    
+  </div>
+  <div class="row">
+    <div class="col-3 text-white">
+      <div class="input-group input-group-sm mb-3">
+        <input type="file" id="upload" name="upload" accept="application/pdf" (change)="upload($event)">
+      </div>
+    </div>
+  </div> 
+  <!-- <ngx-spinner type="ball-scale-multiple"></ngx-spinner> -->
+  <ngx-spinner
+  bdColor="rgba(255,255,255,0.8)"
+  size=small
+
+  template="<img src='https://media.giphy.com/media/jAYUbVXgESSti/giphy.gif' />"
+>
+</ngx-spinner>
+
+</form>

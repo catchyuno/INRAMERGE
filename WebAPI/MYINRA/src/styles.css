@@ -1,0 +1,45 @@
+/* You can add global styles to this file, and also import other style files
+@import "~@ng-select/ng-select/themes/material.theme.css";
+
+.grey-bg {
+    background-color: #F5F7FA;
+}
+body{
+  position: relative;
+  background: #673ab700!important;
+}
+.list-group-item{
+  padding: 0.3rem 1rem !important;
+}
+.full-width{
+  width: 100%;
+}
+.mat-select-disabled .mat-select-value{
+  color:black!important;
+  :disabled{
+      color:black!important;
+  }
+}
+.ng-select.ng-select-disabled .ng-select-container .ng-value-container .ng-value{
+  color:black!important;
+}
+mat-form-field,ng-select{
+  font-weight: bold!important;
+  :disabled{
+      color: black!important;
+  }
+}
+.ng-option-label,.ng-star-inserted{
+  font-weight: bold!important;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; } */
+/* You can add global styles to this file, and also import other style files */
+/* @import "~@ng-select/ng-select/themes/default.theme.css"; */
+@import "~@ng-select/ng-select/themes/material.theme.css";
+
+
+.grey-bg {  
+    background-color: #F5F7FA;
+}

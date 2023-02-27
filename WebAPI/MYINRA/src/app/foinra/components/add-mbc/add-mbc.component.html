@@ -1,0 +1,109 @@
+<h3 mat-dialog-title class="form-row">
+  <p *ngIf="!edit">Ajouter un Marché/BC</p> <p *ngIf="edit && !view">Editer Marché/BC/CONV id : {{mb.id}}</p> <p *ngIf="view">Marché/BC/CONV id : {{mb.id}}</p>
+    </h3>
+<mat-dialog-content  (keydown.escape)="cancel()">
+  <br>
+  <div class="row">
+    <mat-form-field class="col-md-6">
+      <input matInput type="text" [disabled]="view" placeholder="Réference du Marché/BC/CONV*" name="mb.nom" [(ngModel)]="mb.nom">
+    </mat-form-field>
+    <div class="col-md-6">
+      <ng-select style="margin-top:-11.5px" [disabled]="view || this.authService.User.Class!=27" [items]="classes" [virtualScroll]="true" placeholder="Ordonnateur*" bindValue="CLASSE" bindLabel="LIBAFFEC" [(ngModel)]="mb.ordonnateur" >
+      </ng-select>
+    </div>
+    <mat-form-field class="col-md-6">
+      <mat-select [disabled]="view" placeholder="Type" [(value)]="mb.typeMarche">
+              <mat-option value="Bon de commande">Bon de commande</mat-option>
+              <mat-option value="Marche">Marché</mat-option>
+              <mat-option value="Convention">Convention</mat-option>
+      </mat-select>
+  </mat-form-field>
+  <div class="col-md-6">
+    <ng-select style="margin-top:-11.5px" [disabled]="view" [items]="fournisseurs" [virtualScroll]="true" placeholder="Fournisseur*" bindValue="ice" bindLabel="nomSc" [(ngModel)]="mb.ice" >
+      <ng-template ng-option-tmp let-item="item">{{item.ice + ' | ' + item.nomSc}} </ng-template>
+    </ng-select>
+  </div>
+    <mat-form-field class="col-md-6">
+      <input matInput type="number" [disabled]="view" placeholder="Montant Total*" name="mb.montant" [(ngModel)]="mb.montant">
+    </mat-form-field>
+    <mat-form-field class="col-md-6">
+      <input matInput type="number" [disabled]="view" placeholder="Année de réalisation*" name="mb.annee" [(ngModel)]="mb.annee">
+    </mat-form-field>
+    <mat-form-field class="col-md-2">
+      <mat-select [disabled]="view" placeholder="Statut" [(value)]="mb.status">
+              <mat-option [value]="true">Ouvert</mat-option>
+              <mat-option [value]="false">Fermé</mat-option>
+      </mat-select>
+  </mat-form-field>
+  <mat-form-field class="col-md-4">
+    <mat-select [disabled]="view" placeholder="Type de budget" [(value)]="mb.budget">
+            <mat-option value="Budget général">Budget général</mat-option>
+            <mat-option value="Hors budget">Hors budget</mat-option>
+    </mat-select>
+</mat-form-field>
+    <mat-form-field class="col-md-6">
+      <textarea matInput type="text" [disabled]="view" placeholder="Objet du marché/BC/CONV" name="mb.intitule" [(ngModel)]="mb.intitule"></textarea>
+    </mat-form-field>
+
+  </div>
+  <div *ngIf="!view" class="row">
+    <div  class="col-md-5">
+      <ng-select style="margin-top:-6px" [items]="unites" appendTo="div" [virtualScroll]="true" placeholder="Services et unitées bénéficiaires*" [clearSearchOnAdd]="true" bindLabel="LIBAFFEC" [(ngModel)]="service" >
+      </ng-select>
+    </div>
+    <div class="col-md-1">
+      <button mat-icon-button (click)="addsm()" style="margin-top:7px" matTooltip="Ajouter Service/Unité" color="primary">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+    <div (click)="attch()" class="col-md-6">
+      Ajouter un fichier PDF complémentaire
+      <input id="file"  type="file" (change)="f($event)"  style="display: none;">
+          <button mat-icon-button style="margin-top:8px" color="primary">
+              <mat-icon>attach_file</mat-icon>
+          </button>
+          <small>
+            {{'| '+filename +' |'}}
+          </small>
+    </div>
+  </div>
+  <div *ngIf="view">
+    <button *ngIf="mb.fichier!=null" mat-icon-button style="margin-top:-8px" matTooltip="Télécharger le fichier"  (click)="getfile(mb)" color="primary">
+      <mat-icon>get_app</mat-icon></button>
+  </div>
+
+  <table mdbTable>
+    <thead>
+      <th>Liste des Services/Unitées</th>
+    </thead>
+    <tbody>
+      <tr mdbTableCol *ngFor="let i of mb.serviceMarche! | paginate:{ id:'2',itemsPerPage:3,currentPage:p}">
+            <td>
+              {{i.nomServ}}
+            </td>
+            <td>
+                <button *ngIf="!view" mat-icon-button (click)="remove(i)" style="margin-top:-8px" matTooltip="Supprimer le fournisseur" color="warn">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </td>
+      </tr>
+    </tbody>
+    <tfoot *ngIf="mb.serviceMarche?.length!>3">
+      <td  colspan="2" style="text-align: center">
+          <div class="text-center">
+              <pagination-controls id="2" (pageChange)="p = $event" previousLabel='Precedent' nextLabel='Suivant'
+                  [responsive]=true></pagination-controls>
+          </div>
+        </td>
+  </tfoot>
+  </table>
+</mat-dialog-content>
+<br>
+    <pre>* Champs obligatoire</pre>
+    <div *ngIf="!view" class="col-md-6 offset-md-5">
+      <button type="button"   (click)="cancel()" mdbBtn size="sm" color="danger" mdbWavesEffect>Annuler</button>
+      <button type="button" [disabled]="enval"  (click)="valid()" mdbBtn size="sm" color="secondary" mdbWavesEffect>Valider</button>
+    </div>
+    <div *ngIf="view" class="col-md-2 offset-md-10">
+      <button type="button"   (click)="cancel()" mdbBtn size="sm" color="danger" mdbWavesEffect>fermer</button>
+    </div>

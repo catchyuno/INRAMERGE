@@ -1,0 +1,95 @@
+<h1>Gestion des Marché/BC</h1>
+<br>
+<div >
+    <button  mdbBtn color="primary" (click)="addfournisseur()" size='sm' mdbWavesEffect >Gestion des fournisseurs</button>
+    <button mdbBtn color="success" (click)="addmarche()" size='sm' mdbWavesEffect >Ajouter un Marché/BC/Conv</button>
+  <div class="row">
+    <div *ngIf="authService.User.Class==27" class="col-md-4">
+      <ng-select style="margin-top: -11.5px!important" [items]="classes" (change)="filters(filter)" [virtualScroll]="true" appendTo="div" placeholder="Ordonnateur" bindValue="CLASSE" bindLabel="LIBAFFEC" [(ngModel)]="filter.ord" >
+      </ng-select>
+      </div>
+      <mat-form-field class="col-md-2">
+        <mat-select (selectionChange)="filters(filter)" placeholder="Type" [(value)]="filter.type">
+          <mat-option [value]="null">Tout</mat-option>
+          <mat-option value="Bon de commande">Bon de commande</mat-option>
+          <mat-option value="Marche">Marché</mat-option>
+          <mat-option value="Convention">Convention</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field  class="col-md-2">
+        <mat-select (selectionChange)="filters(filter)" placeholder="budget" [(value)]="filter.budget">
+          <mat-option [value]="null">Tout</mat-option>
+          <mat-option value="Budget général">Budget général</mat-option>
+          <mat-option value="Hors budget">Hors budget</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="col-md-2">
+        <input matInput (change)="filters(filter)" type="number" min="0" placeholder="Année"  [(ngModel)]="filter.annee">
+      </mat-form-field>
+  </div>
+   <table mdbTable>
+    <thead>
+      <th>#</th><th>Réf du Marché/BC/CONV</th><th>Type de budget</th><th>Type</th><th>Montant</th><th>Fournisseur</th><th>Sv/Unité</th><th>Statut</th><th>Fichier</th><th>Nb de Factures</th>
+    </thead>
+    <tbody>
+      <tr mdbTableCol *ngFor="let i of filtered | paginate:{ itemsPerPage:6,currentPage:p }">
+        <td>
+              {{i.id}}
+            </td>
+            <td>
+              {{i.nom}}
+            </td>
+            <td>
+              {{i.budget}}
+            </td>
+            <td>
+              {{i.typeMarche}}
+            </td>
+            <td>
+              {{i.montant |number:'0.2':'fr-MA'}} DH
+            </td>
+            <td>
+              {{i.iceNavigation?.nomSc}}
+            </td>
+            <td>
+              <button mat-icon-button (click)="view(i)" style="margin-top:-8px" matTooltip="cliquer pour détails" color="primary">
+                <mat-icon>read_more</mat-icon>
+            </button>
+            </td>
+            <td>
+              {{i.status?'Ouvert':'Fermé'}}
+            </td>
+            <td>
+              <button *ngIf="i.fichier!=null" mat-icon-button style="margin-top:-8px" matTooltip="Télécharger le fichier"  (click)="getfile(i)" color="secondary">
+                <mat-icon>get_app</mat-icon>
+            </button>
+            </td>
+            <td>
+              {{i.facture?.length}}
+            </td>
+            <td style="white-space:nowrap;">
+                <button *ngIf="!i.status" mat-icon-button (click)="openmb(i)" style="margin-top:-8px" matTooltip="Ouvrir" color="success">
+                <mat-icon>check_circle</mat-icon>
+                </button>
+                <button *ngIf="i.status" mat-icon-button (click)="closemb(i)" style="margin-top:-8px" matTooltip="Fermer" color="success">
+                  <mat-icon>highlight_off</mat-icon>
+                  </button>
+                <button *ngIf="i.facture?.length==0 || this.authService.hasrole(5)" mat-icon-button (click)="editmarche(i)" style="margin-top:-8px" matTooltip="Modifier" color="primary">
+                      <mat-icon>edit</mat-icon>
+                </button>
+                <button *ngIf="i.facture?.length==0" mat-icon-button (click)="remove(i)" style="margin-top:-8px" matTooltip="Supprimer" color="warn">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <td colspan="10" style="text-align: center">
+          <div class="text-center">
+              <pagination-controls (pageChange)="p = $event" previousLabel='Precedent' nextLabel='Suivant'
+                  [responsive]='true'></pagination-controls>
+          </div>
+        </td>
+  </tfoot>
+  </table>
+</div>

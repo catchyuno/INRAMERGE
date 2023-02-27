@@ -1,0 +1,106 @@
+<style> 
+  input[type=text] {
+    width: 100%;
+    padding: 6px 10px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    background-color: #3CBC8D;
+    color: rgb(122, 29, 13);
+  }
+  </style>
+<html>
+  <div class="row">
+    <div class="col-12 text-white">
+      <input type="text" value="SAISIE DES ANOMALIES ET REMARQUES (HELPDESK)" style="text-align:center;"  class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" readonly>
+    </div>
+</div> 
+  <p></p>
+  <div class="row">
+    <div class="col-2 text-white">  
+    </div>
+    <div class="col-4 text-white">
+      <div class="input-group input-group-sm mb-3">
+        <select class="form-select form-select-sm" (change)="refresmenuList()" [(ngModel)]="VOLET" name="VOLET" aria-label=".form-select-sm example">
+          <option *ngFor="let dataItem of VoletList" [value]="dataItem.VOLET">
+            {{dataItem.VOLET}}
+          </option>
+        </select>
+      </div>
+  </div>
+  <div class="col-4 text-white">
+    <select class="form-select form-select-sm" (change)="refreshhelpdeskList()" [(ngModel)]="MENU" name="MENU" aria-label=".form-select-sm example">
+      <option *ngFor="let dataItem of MenuList" [value]="dataItem.MENU">
+        {{dataItem.MENU}}
+      </option>
+    </select>
+  </div>
+  <div class="col-2 text-white">  
+  </div>
+</div> 
+<p></p>
+  <div class="container-fluid" >
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Gestion des Incidents (Help Desk)</h5>
+            <button type="button" class="btn-close" (click)="closeClick()" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <app-add_edit_help_desk *ngIf="modopen" [helpdesk]="this.helpdesk"> 
+            </app-add_edit_help_desk>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="InfosModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Gestion des Incidents (Help Desk)</h5>
+            <button type="button" class="btn-close" (click)="closeClick()" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <app-show_infos_help_desk *ngIf="modopen" [helpdesk]="this.helpdesk"> 
+            </app-show_infos_help_desk>
+          </div>
+        </div>
+      </div>
+    </div>
+
+      <div class="container mt-3">
+        <table class="table table-hover" id="table"  data-show-header="true" data-pagination="true"> 
+            <thead>
+                <tr>
+                    <th>DATE</th>
+                    <th>INTITULE</th>
+                    <th>DESCRIPTION</th>
+                    <th>REPONSE</th>
+                    <th>STATUT</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th><button type="button" [hidden]="TEST_HIDE != 'NON'" class="btn btn-outline-success btn-sm" data-bs-toggle="modal"  data-bs-target="#exampleModal" (click)="Addhelpdesk()" data-backdrop="static" data-keyboard="false">Ajouter <i class="fas fa-save"  style="color:rgb(25, 236, 71)"></i></button></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let dataItem of helpdeskList | paginate: { itemsPerPage: 8, currentPage: p }">
+                  <td>{{dataItem.DATE | date:'dd/MM/yyyy'}}</td>
+                  <td>{{dataItem.INTITULE}}</td>
+                  <td>{{dataItem.DESCRIPTION.replaceAll("_", "'").substring(0,30) + " ..."}}</td>
+                  <td>{{dataItem.REPONSE.replaceAll("_", "'").substring(0,30) + " ..."}}</td>
+                  <td>{{dataItem.STATUT}}</td>
+                  <td><i class="fas fa-info-circle" style="color:#c9be63" (click)="infoshelpdesk(dataItem)" data-bs-toggle="modal"  data-bs-target="#InfosModal"></i></td>
+                  <td><i class="fas fa-download" style="color:#00cc6a" (click)="downloadfile(dataItem)"></i></td>
+                  <td><i class="fas fa-edit" [hidden]="dataItem.STATUT!= 'EN COURS'" style="color:#5aa1cf" (click)="Edithelpdesk(dataItem)" data-bs-toggle="modal"  data-bs-target="#exampleModal"></i></td>
+                  <td><i class="fas fa-trash-alt" [hidden]="dataItem.STATUT!= 'EN COURS'" style="color:#e95834" (click)="deletehelpdesk(dataItem)"></i></td>                  
+                </tr>
+              </tbody>
+        </table>
+      </div>
+       <p class="text-center"><pagination-controls nextLabel="Suivant" previousLabel="Précedent" (pageChange)="p = $event"></pagination-controls></p> 
+</div>
+</html>

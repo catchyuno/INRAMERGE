@@ -1,0 +1,42 @@
+<form>
+  <div class="row">
+    <div class="col-7 text-white">
+        <div class="input-group input-group-sm mb-3">
+          <span class="input-group-text" id="inputGroup-sizing-sm">CATEGORIE</span>
+          <input type="text" name="CATEGORIE" style="text-align:center;" [(ngModel)]="CATEGORIE" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" readonly>
+        </div>
+    </div>
+    <div class="col-5 text-white"> 
+      <div class="input-group input-group-sm mb-3">
+        <input type="file" [hidden]="ACTIVATE != 'OUI'" id="upload" name="upload" accept="application/pdf" (change)="upload($event)"> 
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-0 text-white">
+    </div>
+    <div class="col-12 text-white">
+      <div class="input-group input-group-sm mb-3">
+          <span class="input-group-text" id="inputGroup-sizing-sm">INTITULE</span>
+          <input type="text" (focusout)="activer()" maxlength="45" name="INTITULE" [(ngModel)]="INTITULE" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+          <input type="text" hidden name="INTITULE_ANCIEN" [(ngModel)]="INTITULE_ANCIEN" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+        </div>
+  </div>
+  </div>
+  <div class="row">
+    <div class="col-0 text-white">
+    </div>
+    <div class="col-12 text-white">
+
+  </div>
+  </div>
+  <div class="row">
+    <div class="col-7 text-white">
+      <div class="input-group input-group-sm mb-3">
+      <button (click)="updatedocument()" *ngIf="document.INTITULE!=''" class="btn btn-primary">
+        MODIFIER
+    </button>
+      </div>
+    </div>
+  </div>
+</form>

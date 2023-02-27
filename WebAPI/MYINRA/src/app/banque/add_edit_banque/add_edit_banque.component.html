@@ -1,0 +1,31 @@
+<form>
+  <div class="row">
+    <div class="col-0 text-white">
+    </div>
+    <div class="col-12 text-white">
+        <div class="input-group input-group-sm mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-sm">BANQUE</span>  
+            <input type="text" style="text-align:center;" onkeydown="event.returnValue=(event.key>=0 || event.key <= 9)?false:true" maxlength="150" name="BANQUE_FR" [(ngModel)]="BANQUE_FR" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+            <input type="text" hidden name="BANQUE_FR_ANCIEN" [(ngModel)]="BANQUE_FR_ANCIEN" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+        </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-10 text-white">
+      <div class="input-group input-group-sm mb-3">
+          <span class="input-group-text" id="inputGroup-sizing-sm">البنك</span>
+          <input type="text" maxlength="150" name="BANQUE_AR" [(ngModel)]="BANQUE_AR" style="text-align:center;" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+      </div>
+  </div>
+  <div class="col-2 text-white">
+    <div class="input-group input-group-sm mb-3">
+        <button (click)="addbanque()" *ngIf="banque.ABBREVIATION==''" class="btn btn-primary">
+        VALIDER
+    </button>
+    <button (click)="updatebanque()" *ngIf="banque.ABBREVIATION!=''" class="btn btn-primary">
+      MODIFIER
+  </button>
+    </div>
+  </div>
+  </div>
+</form>

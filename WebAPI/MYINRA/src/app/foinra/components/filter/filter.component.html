@@ -1,0 +1,55 @@
+<h3 mat-dialog-title class="form-row">Filtre    </h3>
+<mat-dialog-content (keydown.escape)="cancel()">
+  <br>
+<div class="row justify-center">
+  <div *ngIf="authService.hasrole(5) || authService.hasrole(6)" class="col-md-4">
+    <ng-select style="margin-top: -11.5px!important" appendTo="div" [items]="classes" [virtualScroll]="true"  placeholder="Ordonnateur" bindValue="CLASSE" bindLabel="LIBAFFEC" [(ngModel)]="filtrage.ord" >
+    </ng-select>
+  </div>
+  <div  class="col-md-4">
+    <ng-select style="margin-top: -11.5px!important" [items]="unites"  [virtualScroll]="true" placeholder="Services et unitées bénéficiaires" bindValue="UNITE" bindLabel="LIBAFFEC" [(ngModel)]="filtrage.unite" >
+    </ng-select>
+  </div>
+  <mat-form-field class="col-md-2">
+    <input matInput [(ngModel)]="filtrage.de" [matDatepicker]="picker145" placeholder="De">
+    <mat-datepicker-toggle matSuffix [for]="picker145"></mat-datepicker-toggle>
+    <mat-datepicker #picker145></mat-datepicker>
+</mat-form-field>
+<mat-form-field class="col-md-2">
+  <input matInput [(ngModel)]="filtrage.a" [matDatepicker]="picker146" placeholder="A">
+  <mat-datepicker-toggle matSuffix [for]="picker146"></mat-datepicker-toggle>
+  <mat-datepicker #picker146></mat-datepicker>
+</mat-form-field>
+<mat-form-field class="col-md-2">
+  <mat-select placeholder="Type" [(value)]="filtrage.type">
+    <mat-option [value]="null"></mat-option>
+    <mat-option value="Bon de commande">Bon de commande</mat-option>
+    <mat-option value="Marche">Marché</mat-option>
+    <mat-option value="Convention">Convention</mat-option>
+  </mat-select>
+</mat-form-field>
+<mat-form-field class="col-md-2">
+  <mat-select placeholder="Type de budget" [(value)]="filtrage.budget">
+    <mat-option [value]="null"></mat-option>
+    <mat-option value="Budget général">Budget général</mat-option>
+    <mat-option value="Hors budget">Hors budget</mat-option>
+  </mat-select>
+</mat-form-field>
+<mat-form-field class="col-md-2">
+  <mat-select placeholder="Crédit" [(value)]="filtrage.credit">
+    <mat-option [value]="null"></mat-option>
+    <mat-option value="Neuf">Neuf</mat-option>
+    <mat-option value="Report">Report</mat-option>
+  </mat-select>
+</mat-form-field>
+<mat-form-field class="col-md-2">
+  <input matInput type="number" min="0" placeholder="Montant supérieur à"  [(ngModel)]="filtrage.sup">
+</mat-form-field>
+<mat-form-field class="col-md-2">
+  <input matInput type="number" min="0" placeholder="Montant inférieur à"  [(ngModel)]="filtrage.inf">
+</mat-form-field>
+</div>
+</mat-dialog-content>
+<div  class="col-md-2 offset-md-10">
+  <button type="button"   (click)="cancel()" mdbBtn size="sm" color="danger" mdbWavesEffect>fermer</button>
+</div>

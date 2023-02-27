@@ -1,0 +1,21 @@
+<html>
+      <div class="container mt-3">
+        <table class="table table-hover" id="table"  data-show-header="true" data-pagination="true"> 
+            <thead>
+                <tr>
+                    <th>DU</th>
+                    <th>AU</th>
+                    <th>AFFECTATION</th>
+                 </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let dataItem of fonctionList | paginate: { id:'fonction', itemsPerPage: 8, currentPage: pf }">
+                  <td>{{dataItem.deffet | date:'dd/MM/yyyy'}}</td>
+                  <td>{{dataItem.LIBFONCR.toUpperCase()}}</td>
+                  <td>{{dataItem.LIBC.toUpperCase()}}</td>
+                </tr>
+              </tbody>
+        </table>
+      </div>
+       <p class="text-center"><pagination-controls id="fonction" nextLabel="Suivant" previousLabel="Précedent" (pageChange)="pf = $event"></pagination-controls></p> 
+</html>

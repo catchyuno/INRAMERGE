@@ -1,0 +1,91 @@
+<style> 
+  input[type=text] {
+    width: 100%;
+    padding: 6px 10px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    background-color: #3CBC8D;
+    color: rgb(122, 29, 13);
+  }
+  </style>
+<html>
+  <div class="row">
+    <div class="col-12 text-white">
+      <input type="text" value="PARAMETRAGE DES SIGNATAIRES D'ATTESTATIONS" style="text-align:center;"  class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" readonly>
+    </div>
+</div> 
+  <p></p>
+  <div class="row">
+    <div class="col-4 text-white">  
+    </div>
+    <div class="col-4 text-white">
+    </div>
+  <div class="col-4 text-white">
+  </div>
+</div> 
+  <div class="container-fluid" >
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Mise à jour des signataires (Absences)</h5>
+            <button type="button" class="btn-close" (click)="closeClick()" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <app-add_edit_etat_signature *ngIf="modopen" [signature]="this.signature"> 
+            </app-add_edit_etat_signature>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="EnteteModal" tabindex="-1" aria-labelledby="EnteteModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="EnteteModalLabel">Mise à jour de l'entête et pied de page</h5>
+            <button type="button" class="btn-close" (click)="closeClick()" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <app-add_edit_entete_pied *ngIf="modopen"> 
+            </app-add_edit_entete_pied>
+          </div>
+        </div>
+      </div>
+    </div>
+      <div class="container mt-3">
+        <table class="table table-hover" id="table"  data-show-header="true" data-pagination="true"> 
+            <thead>
+                <tr>
+                    <th>ORDRE</th>
+                    <th>DDP</th>
+                    <th>NOM ET PRENOM</th>
+                    <th>MOTIF</th>
+                    <th>ABSENCE (DU)</th>
+                    <th>ABSENCE (AU)</th>
+                    <th>SIGNATAIRE OBLIGATOIRE</th>
+                    <th>SIGNATURE</th>
+                    <th></th>
+                    <th><button type="button"  class="btn btn-outline-success btn-sm" data-bs-toggle="modal"  data-bs-target="#exampleModal" (click)="Addsignature()" data-backdrop="static" data-keyboard="false">Ajouter Signataire <i class="fas fa-save"  style="color:rgb(25, 236, 71)"></i></button></th>
+                    <th><button type="button"  class="btn btn-outline-success btn-sm" data-bs-toggle="modal"  data-bs-target="#EnteteModal" (click)="UpdateEntetePied()" data-backdrop="static" data-keyboard="false">Entête/Pied Page <i class="fas fa-edit"  style="color:rgb(25, 236, 71)"></i></button></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let dataItem of signatureList | paginate: { itemsPerPage: 8, currentPage: p }">
+                  <td>{{dataItem.ORDRE}}</td>
+                  <td>{{dataItem.DDP}}</td>
+                  <td>{{dataItem.NOM_PRENOM}}</td>
+                  <td>{{dataItem.MOTIF}}</td>
+                  <td>{{dataItem.ABSENCE_DU | date:'dd/MM/yyyy'}}</td>
+                  <td>{{dataItem.ABSENCE_AU | date:'dd/MM/yyyy'}}</td>
+                  <td>{{dataItem.DDP_SIGNATAIRE_OBLIGATOIRE}} - {{dataItem.NOM_PRENOM_SIGNATAIRE_OBLIGATOIRE}}</td>
+                  <td><i class="fas fa-download" style="color:#00cc6a" (click)="downloadfile(dataItem)"></i></td>
+                  <td><i class="fas fa-edit" style="color:#5aa1cf" (click)="Editsignature(dataItem)" data-bs-toggle="modal"  data-bs-target="#exampleModal"></i></td>
+                  <td><i class="fas fa-trash-alt" style="color:#e95834" (click)="deletesignature(dataItem)"></i></td>  
+                </tr>
+              </tbody>
+        </table>
+      </div>
+       <p class="text-center"><pagination-controls nextLabel="Suivant" previousLabel="Précedent" (pageChange)="p = $event"></pagination-controls></p> 
+</div>
+</html>

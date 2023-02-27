@@ -1,0 +1,75 @@
+<style> 
+  input[type=text] {
+    width: 100%;
+    padding: 6px 10px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    background-color: #3CBC8D;
+    color: rgb(122, 29, 13);
+  }
+  </style>
+<html>
+  <div class="row">
+    <div class="col-12 text-white">
+      <input type="text" value="DEMANDE DE MAINLEVEE SUR DOMICILIATIONS DE SALAIRE" style="text-align:center;"  class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" readonly>
+    </div>
+</div> 
+  <p></p>
+  <div class="row">
+    <div class="col-4 text-white">  
+    </div>
+    <div class="col-4 text-white">
+        <ng-select [items]="AgentList" name="agent" (clear)="vider()" placeholder="Recherche Agent" bindLabel="NOM_PRENOM" [virtualScroll]="true"   [(ngModel)]="agent" (change)="choixagent(agent)">
+          <ng-template ng-label-tmp ng-option-tmp let-item="item">
+            {{item.DDP + " : " + item.NOM_PRENOM}}
+        </ng-template>
+        </ng-select>
+    </div>
+  <div class="col-4 text-white">
+  </div>
+</div> 
+  <div class="container-fluid" >
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Chargement de la Main Levée Bancaire</h5>
+            <button type="button" class="btn-close" (click)="closeClick()" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <app-add_edit_main_levee *ngIf="modopen" [MainLevee]="this.MainLevee"> 
+            </app-add_edit_main_levee>
+          </div>
+        </div>
+      </div>
+    </div>
+      <div class="container mt-3">
+        <table class="table table-hover" id="table"  data-show-header="true" data-pagination="true"> 
+            <thead>
+                <tr>
+                    <th>DATE</th>
+                    <th>BANQUE</th>
+                    <th>RIB</th>
+                    <th>ETAT</th>
+                    <!-- <th>STATUT</th> -->
+                    <th><button type="button" *ngIf="this.DDP_SELECTIONNE=='OUI'"  class="btn btn-outline-success btn-sm" data-bs-toggle="modal"  data-bs-target="#exampleModal" (click)="AddMainLevee()" data-backdrop="static" data-keyboard="false">Ajouter <i class="fas fa-edit"  style="color:rgb(25, 236, 71)"></i></button></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let dataItem of MainLeveeList | paginate: { itemsPerPage: 8, currentPage: p }">
+                  <td>{{dataItem.DATE | date:'dd/MM/yyyy'}}</td>
+                  <td>{{dataItem.BANQUE}}</td>
+                  <td>{{dataItem.RIB}}</td>
+                  <td>{{dataItem.ETAT}}</td>
+                  <!-- <td>{{dataItem.STATUT}}</td> -->
+                  <td><i class="fas fa-download" style="color:#00cc6a" (click)="downloadfile(dataItem)"></i></td>
+                  <!-- <td><i class="fas fa-edit" [hidden]="dataItem.ETAT!= 'EN COURS'" style="color:#5aa1cf" (click)="EditMainLevee(dataItem)" data-bs-toggle="modal"  data-bs-target="#exampleModal"></i></td> -->
+                  <td><i class="fas fa-trash-alt" [hidden]="dataItem.ETAT!= 'EN COURS'" style="color:#e95834" (click)="deleteMainLevee(dataItem)"></i></td>                  
+                </tr>
+              </tbody>
+        </table>
+      </div>
+      <p class="text-center"><pagination-controls nextLabel="Suivant" previousLabel="Précedent" (pageChange)="p = $event"></pagination-controls></p>
+</div>
+</html>

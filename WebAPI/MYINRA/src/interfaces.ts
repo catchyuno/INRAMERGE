@@ -1,0 +1,79 @@
+export interface Facture {
+    idFacture?:number,
+    dateDepot?:Date,
+    numFacture?:number,
+    numDossier?:string,
+    status?:string,
+    idMarche?:number,
+    dateSaisie?:Date,
+    userSaisie?:string,
+    fichier?:string,
+    montant?:number,
+    credit?:string,
+    idMarcheNavigation?:MarcheBc,
+    trajetFacture?:TrajetFacture[]
+}
+export interface Fournisseur{
+    ice?:string,
+    registreCommerce?:string,
+    raisonSociale?:string,
+    idFiscal?:string,
+    type?:string,
+    nomResp?:string,
+    email?:string,
+    idUser?:string,
+    nomSc?:string,
+    classf?:number,
+    enabled?:boolean,
+    tel?:string,
+    marcheBcs?:MarcheBc[]
+}
+export interface TrajetFacture{
+    idFacture?:number,
+    etape?:number,
+    type?:boolean,
+    op?:string,
+    commentaire?:string,
+    fichier?:string,
+    datePhysique?:Date,
+    dateFait?:Date,
+    userSaisie?:string,
+    dureePrec?:number,
+    notifenvoye?:boolean,
+    notifyellow?:Date,
+    notifdate?:Date,
+    notifred?:Date,
+    notifyellowenvoye?:boolean,
+    notifredenvoye?:boolean,
+    notifreq?:boolean,
+    idService?:number,
+    nomServ?:string,
+    dateSasie?:Date,
+    idFactureNavigation?:Facture[],
+    notifications?:any[]
+}
+export interface MarcheBc{
+    id?:number,
+    intitule?:string,
+    nom?:string,
+    montant?:number,
+    ice?:string,
+    ordonnateur?:number,
+    dateSaisie?:Date,
+    typeMarche?:string,
+    userSaisie?:string,
+    annee?:number,
+    status?:boolean,
+    fichier?:string,
+    budget?:string,
+    iceNavigation?:Fournisseur,
+    facture?:Facture[],
+    serviceMarche?:serviceMarche[]
+}
+export interface serviceMarche{
+    idMarche?:number,
+    idService?:number,
+    nomServ?:string,
+    status?:number,
+    idMarcheNavigation?:MarcheBc[]
+}

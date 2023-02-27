@@ -1,0 +1,46 @@
+<form>
+  <div class="row">
+    <div class="col-3 text-white">
+      <div class="input-group input-group-sm mb-3">
+          <span class="input-group-text" id="inputGroup-sizing-sm">DATE</span>
+          <input type="text" name="DATE" style="text-align:center;" [ngModel]="DATE | date:'dd/MM/yyyy'" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" readonly>
+      </div>
+  </div> 
+    <div class="col-3 text-white">
+        <div class="input-group input-group-sm mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-sm">DDP</span>
+            <input type="text" [(ngModel)]="DDP" name="DDP" style="text-align:center;" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" readonly>
+        </div>
+    </div>  
+    <div class="col-6 text-white">
+        <div class="input-group input-group-sm mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-sm">NOM ET PRENOM</span>
+            <input type="text" name="NOM_PRENOM" style="text-align:center;" [(ngModel)]="NOM_PRENOM" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" readonly>
+        </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-3 text-white">
+        <div class="input-group input-group-sm mb-3">
+          <select class="form-select form-select-sm" [(ngModel)]="LANGUE" name="LANGUE" aria-label=".form-select-sm example">
+            <option value="FRANCAIS" selected>FRANCAIS</option>
+            <option value="ARABE">ARABE</option>
+          </select>
+        </div>
+    </div>
+    <div class="col-3 text-white">
+      <div class="input-group input-group-sm mb-3">
+          <button (click)="addEtatTravail()" class="btn btn-primary">
+          VALIDER LA DEMANDE
+      </button>
+      </div>
+    </div>
+  </div>
+  <ngx-spinner
+  bdColor="rgba(255,255,255,0.8)"
+  size=small
+
+  template="<img src='https://media.giphy.com/media/jAYUbVXgESSti/giphy.gif' />"
+>
+</ngx-spinner>
+</form>

@@ -1,0 +1,74 @@
+<style> 
+  input[type=text] {
+    width: 100%;
+    padding: 6px 10px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    background-color: #3CBC8D;
+    color: rgb(122, 29, 13);
+  }
+  </style>
+<html>
+  <div class="row">
+    <div class="col-12 text-white">
+      <input type="text" value="EDITION DES ATTESTATIONS DE PRIME" style="text-align:center;"  class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" readonly>
+    </div>
+</div> 
+  <p></p>
+  <div class="row">
+    <div class="col-4 text-white">  
+    </div>
+    <div class="col-4 text-white">
+      <!-- <ngx-select-dropdown [hidden]="CATEGORIE_AGENT == 'AGENT'"  name="agent" [config]="config" [options]="AgentList" [(ngModel)]="agent" (change)="choixagent(agent)">
+      </ngx-select-dropdown> -->
+      <ng-select [items]="AgentList" name="agent" placeholder="Recherche Agent" bindLabel="NOM_PRENOM" [virtualScroll]="true"  [hidden]="CATEGORIE_AGENT == 'AGENT'"  [(ngModel)]="agent" (clear)="vider()" (change)="choixagent(agent)">
+        <ng-template ng-label-tmp ng-option-tmp let-item="item">
+          {{item.DDP + " : " + item.NOM_PRENOM}}
+      </ng-template>
+      </ng-select>
+    </div>
+  <div class="col-4 text-white">
+  </div>
+</div> 
+  <div class="container-fluid" >
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Edition de l'attestation de prime</h5>
+            <button type="button" class="btn-close" (click)="closeClick()" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <app-add_edit_etat_prime *ngIf="modopen" [UserInf]="this.agent"> 
+            </app-add_edit_etat_prime>
+          </div>
+        </div>
+      </div>
+    </div>
+      <div class="container mt-3">
+        <table class="table table-hover" id="table"  data-show-header="true" data-pagination="true"> 
+            <thead>
+                <tr>
+                    <th>DATE</th>
+                    <th>ANNEE</th>
+                    <th>PRIME</th>
+                    <th>STATUT</th>
+                    <th>ETAT</th>
+                    <th><button type="button" *ngIf="this.DDP_SELECTIONNE=='OUI'" class="btn btn-outline-success btn-sm" data-bs-toggle="modal"  data-bs-target="#exampleModal" (click)="AddEtatPrime()" data-backdrop="static" data-keyboard="false">Editer <i class="fas fa-print"  style="color:rgb(25, 236, 71)"></i></button></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let dataItem of EtatPrimeList | paginate: { itemsPerPage: 8, currentPage: p }">
+                  <td>{{dataItem.DATE | date:'dd/MM/yyyy'}}</td>
+                  <td>{{dataItem.ANNEE}}</td>
+                  <td>{{dataItem.PRIME}}</td>
+                  <td>{{dataItem.STATUT}}</td>
+                  <td><i class="fas fa-download" style="color:#00cc6a" (click)="downloadfile(dataItem)"></i></td>
+                </tr>
+              </tbody>
+        </table>
+      </div>
+      <p class="text-center"><pagination-controls nextLabel="Suivant" previousLabel="Précedent" (pageChange)="p = $event"></pagination-controls></p>
+</div>
+</html>

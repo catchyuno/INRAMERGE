@@ -1,0 +1,27 @@
+<form>
+  <div class="row">
+    <div class="col-2 text-white">
+      <select class="form-select form-select-sm" (change)="refreshrubriqueList()" [(ngModel)]="TYPE" name="TYPE" aria-label=".form-select-sm example">
+        <option value="PRET" selected>PRET</option>
+        <option value="RETENUE">RETENUE</option>
+      </select>
+    </div>
+    <div class="col-7 text-white">
+      <ng-select [items]="RubriqueList" (change)="test_vide()" name="rubrique" bindLabel="RUBRIQUE_ABBREVEE" [virtualScroll]="true" [(ngModel)]="rubrique">
+        <ng-template ng-label-tmp ng-option-tmp let-item="item">
+          {{item.CODE_RUBRIQUE + " : " + item.RUBRIQUE_ABBREVEE}}
+      </ng-template>
+      </ng-select>
+    </div>
+    <div class="col-3 text-white">
+      <div class="input-group input-group-sm mb-3">
+          <button (click)="addPrecompte()" [hidden]="this.CACHER_AJOUTER==='OUI'" class="btn btn-primary">
+          VALIDER LA DEMANDE
+      </button>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="row">
+    
+  </div> -->
+</form>

@@ -1,0 +1,61 @@
+<h3>Inscription</h3>
+<br>
+
+<div class="form-row col-md-4">
+        <mat-form-field class="col-md-12">
+                <input matInput type="text" placeholder="Nom d'utilisateur*" name="blabla" [(ngModel)]="user.userName">
+                <mat-hint style="text-align: center">
+                        <strong style="color:red;font-size:12px">{{usermsg}}</strong>
+                </mat-hint>
+        </mat-form-field>
+        <mat-form-field class="col-md-12">
+                <input matInput type="email" placeholder="Email*" name="user.email" [(ngModel)]="fournisseur.email">
+        </mat-form-field>
+        <mat-form-field class="col-md-12">
+                <input matInput type="password" placeholder="Mot de passe*" name="ssaaas" [(ngModel)]="user.password">
+        </mat-form-field>
+        <mat-form-field class="col-md-12">
+                <input matInput type="password" placeholder="Confimer mot de passe*" name="cpassword"
+                        [(ngModel)]="cpassword">
+                <mat-hint style="text-align: center">
+                        <strong style="color:red;font-size:12px">{{msg}}</strong>
+                </mat-hint>
+        </mat-form-field>
+        <div class="col-md-12">
+                <ng-select style="margin-top: -11.5px!important" [items]="classes" appendTo="div" [virtualScroll]="true"
+                        placeholder="Ordonnateur*" bindValue="CLASSE" bindLabel="LIBAFFEC"
+                        [(ngModel)]="fournisseur.Classf">
+                </ng-select>
+        </div>
+        <mat-form-field class="col-md-12">
+                <input matInput type="text" placeholder="Nom de société*" name="fournisseur.nomSc" [(ngModel)]="fournisseur.nomSc">
+        </mat-form-field>
+        <mat-form-field class="col-md-12">
+                <input matInput type="text" placeholder="Nom et prénom du responsable*" name="fournisseur.nomResp" [(ngModel)]="fournisseur.nomResp">
+        </mat-form-field>
+        <mat-form-field class="col-md-12">
+                <input matInput type="text" placeholder="ICE*" name="fournisseur.ice" [(ngModel)]="fournisseur.ice">
+        </mat-form-field>
+        <mat-form-field class="col-md-12">
+                <input matInput type="text" placeholder="Tel" name="fournisseur.tel"
+                        [(ngModel)]="fournisseur.tel">
+        </mat-form-field>
+        <mat-form-field class="col-md-12">
+                <input matInput type="text" placeholder="Registre de Commerce" name="fournisseur.registreCommerce"
+                        [(ngModel)]="fournisseur.registreCommerce">
+        </mat-form-field>
+        <mat-form-field class="col-md-12">
+                <input matInput type="text" placeholder="Raison sociale" name="fournisseur.raisonSociale"
+                        [(ngModel)]="fournisseur.raisonSociale">
+        </mat-form-field>
+        <mat-form-field class="col-md-12">
+                <input matInput type="text" placeholder="Id fiscale" name="fournisseur.idFiscal"
+                        [(ngModel)]="fournisseur.idFiscal">
+        </mat-form-field>
+        <br>
+        <pre>* champs obligatoire</pre>
+        <div class="col-md-12">
+                <button mdbBtn color="success" (click)="valid()" mdbWavesEffect>Valider</button>
+                <button mdbBtn color="primary" (click)="conn()" mdbWavesEffect>Se connecter</button>
+        </div>
+</div>

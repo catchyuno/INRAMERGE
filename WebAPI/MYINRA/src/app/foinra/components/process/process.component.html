@@ -1,0 +1,125 @@
+<h3 mat-dialog-title class="form-row">
+  <p >Gérer facture id : {{facture.idFacture}}</p>
+</h3>
+<mat-dialog-content (keydown.escape)="cancel()">
+  <div  class="form-row">
+    <div class="col-md-8">
+      <ul class="list-group">
+        <li class="list-group-item">
+
+            <pre>Société/Fournisseur:             </pre><i>{{getice(facture.idMarcheNavigation.ice)}}</i>
+
+        </li>
+        <li class="list-group-item">
+
+            <pre>N°Facture:           </pre><i>{{facture.numFacture}}</i>
+
+        </li>
+        <li class="list-group-item">
+
+            <pre>Marché/BC/Convention:           </pre><i>{{facture.idMarcheNavigation.nom}}</i>
+
+        </li>
+        <li class="list-group-item">
+
+          <pre>Numéro Dossier:           </pre><i>{{facture.numDossier}}</i>
+
+      </li>
+        <li class="list-group-item">
+            <pre>Objet:  </pre><i>{{facture.idMarcheNavigation.intitule}}</i>
+        </li>
+        <li class="list-group-item">
+
+          <pre>Ordonnateur:             </pre><i>{{getclasse(facture.idMarcheNavigation.ordonnateur)}}</i>
+
+      </li>
+        <li class="list-group-item">
+
+            <pre>Montant Facture:             </pre><i>{{facture.montant |number:'0.2':'fr-MA'}} DH</i>
+
+        </li>
+        <li class="list-group-item">
+
+          <pre>Montant Total:             </pre><i>{{facture.idMarcheNavigation.montant |number:'0.2':'fr-MA'}} DH</i>
+
+      </li>
+        <li class="list-group-item">
+
+            <pre>Date dépôt:          </pre><i>{{tomoment(facture.dateDepot)}}</i>
+
+        </li>
+
+      </ul>
+    </div>
+    <div class="col-md-4">
+      <mat-card *ngIf="facture.status=='Déposé'">
+        <p>Statut : {{facture.status}} </p>
+        <p>Date statut : {{tomoment(mindate)}}</p>
+      </mat-card>
+      <mat-card *ngIf="facture.status!='Déposé'">
+        <div style="word-break: break-all;">
+          <p>Statut : {{facture.status}} </p><pre>{{rejeter?'Rejeté':'Approuvé'}}</pre>
+          <p>Date statut : {{tomoment(mindate)}}</p>
+          <p>Commentaire :</p>
+          <i *ngIf="last!=null">{{last.commentaire}}</i>
+        </div>
+        <table *ngIf="multiplesm.length!=0 && !perm" mdbTable>
+          <thead>
+            <th>Service/Unité</th><th>Statut</th>
+          </thead>
+          <tbody>
+            <tr  mdbTableCol *ngFor="let i of multiplesm | paginate:{ id:'21',itemsPerPage:4,currentPage:p }">
+              <td>{{i.nomServ}}</td>
+              <td>{{i.status==1?"Constaté":"En attente"}}</td>
+            </tr>
+          </tbody>
+          <tfoot *ngIf="multiplesm.length>=4">
+            <td colspan="2" style="text-align: center">
+                <div class="text-center">
+                    <pagination-controls id="21" (pageChange)="p = $event" previousLabel='Precedent' nextLabel='Suivant'
+                        [responsive]='true'></pagination-controls>
+                </div>
+              </td>
+        </tfoot>
+        </table>
+
+      </mat-card>
+      <br>
+      <mat-card *ngIf="perm">
+        <p>Confirmer ou rejeter l'opération!</p>
+        <mat-form-field class="col-md-12">
+          <input matInput (dateChange)="calculduree()" [(ngModel)]="trajet.dateFait" [min]="mindate" [matDatepicker]="picker9" placeholder="Date d'opération">
+          <mat-datepicker-toggle matSuffix [for]="picker9"></mat-datepicker-toggle>
+          <mat-datepicker #picker9></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field *ngIf="operation=='Ordonnancement'" class="col-md-12">
+        <input matInput type="text" placeholder="Numéro Dossier"  name="facture.numDossier" [(ngModel)]="facture.numDossier">
+      </mat-form-field>
+      <mat-form-field *ngIf="operation=='Ordonnancement'" class="col-md-12">
+        <mat-select placeholder="Crédit" [(value)]="facture.credit">
+                <mat-option value="Neuf">Neuf</mat-option>
+                <mat-option value="Report">Report</mat-option>
+        </mat-select>
+    </mat-form-field>
+          <mat-form-field class="col-md-12">
+            <textarea matInput placeholder="Commentaire/Motif" rows="3" name="trajet.commentaire" [(ngModel)]="trajet.commentaire"></textarea>
+          </mat-form-field>
+        <div (click)="attch()" class="col-md-12">
+          Ajouter un fichier PDF complémentaire
+          <input id="file"  type="file" (change)="f($event)"  style="display: none;">
+              <button mat-icon-button style="margin-top:8px" color="primary">
+                  <mat-icon>attach_file</mat-icon>
+              </button>
+              <small>
+                {{'| '+filename +' |'}}
+              </small>
+        </div>
+        <button type="button"   (click)="valid()" mdbBtn size="sm" color="secondary" mdbWavesEffect>{{operation}}</button>
+        <button type="button"   (click)="rejet()" style="margin:6px" mdbBtn size="sm" color="info" mdbWavesEffect>Rejeter</button>
+      </mat-card>
+    </div>
+  </div>
+</mat-dialog-content>
+<div class="col-md-2 offset-md-10">
+  <button type="button"   (click)="cancel()" mdbBtn size="sm" color="danger" mdbWavesEffect>fermer</button>
+</div>

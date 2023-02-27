@@ -1,0 +1,71 @@
+<h1>Mes factures <button *ngIf="authService.hasrole(0) || authService.hasrole(1) || authService.hasrole(5)" mdbBtn size="sm" color="success" (click)="openfacture()" class="text-right"
+    mdbWavesEffect>Ajouter une facture</button> <button mdbBtn size="sm" color="primary" (click)="filtering()" class="text-right"
+    mdbWavesEffect><mdb-icon fas icon="filter"></mdb-icon></button>
+    <button mdbBtn size="sm" color="danger" (click)="cancel()" class="text-right"
+    mdbWavesEffect><mdb-icon fas icon="refresh"></mdb-icon></button>
+    <button  mat-icon-button matTooltip="Excel" color="accent" (click)="excel()" class="text-right"><mat-icon>description</mat-icon></button></h1>
+    <div class="col-md-7">
+      <ng-select style="margin-top: -11.5px!important" [items]="filter" [virtualScroll]="true" (change)="getBill()" [searchFn]="findBill" placeholder="Recherche facture" bindLabel="numFacture" (clear)="filters(filtrage)" [(ngModel)]="search" >
+        <ng-template ng-label-tmp ng-option-tmp let-item="item">{{'#'+item.idFacture+' | '+ item.numFacture + ' | ' + item.idMarcheNavigation.nom + ' | '}} {{item.montant |number:'0.2':'fr-MA'}} DH</ng-template>
+      </ng-select>
+    </div>
+
+<table mdbTable>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>N° Facture</th>
+      <th>Marché/BC/CONV</th>
+      <th>Montant facture</th>
+      <th>Crédit</th>
+      <th>Société</th>
+      <th>Date dépôt</th>
+      <th>Statut</th>
+      <th>Détails Marché/BC</th>
+      <th>Fichier</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr mdbTableCol *ngFor="let i of filter | paginate:{ itemsPerPage:8,currentPage:p }">
+      <td><b><mdb-badge *ngIf="notif[factures.indexOf(i)]" color="green">{{i.idFacture}}</mdb-badge> <span *ngIf="!notif[factures.indexOf(i)]">{{i.idFacture}}</span> </b></td>
+      <td>{{i.numFacture}} </td>
+      <td>{{i.idMarcheNavigation?.nom}} </td>
+      <td>{{i.montant |number:'0.2':'fr-MA'}} DH </td>
+      <td>{{i.credit}}</td>
+      <td>{{getice(i.idMarcheNavigation?.ice)}}</td>
+      <td>{{tomoment(i.dateDepot)}}</td>
+      <td>{{i.status}} </td>
+      <td><button mat-icon-button (click)="view(i)" style="margin-top:-8px" matTooltip="cliquer pour détails" color="primary">
+        <mat-icon>read_more</mat-icon>
+    </button></td>
+      <td><button mat-icon-button style="margin-top:-8px" matTooltip="Télécharger la facture"  (click)="getfile(i)" color="secondary">
+        <mat-icon>get_app</mat-icon>
+    </button></td>
+    <td>
+      <button *ngIf="i.status!='Rejeter' && i.status!='Annuler'" [disabled]="loading" mat-icon-button matTooltip="Gérer" (click)="process(i)" style="margin-top:-8px" color="primary">
+        <mat-icon>list</mat-icon>
+      </button>
+      <button *ngIf="!authService.hasrole(0)" [disabled]="loading" matTooltip="Historique" mat-icon-button (click)="history(i)" style="margin-top:-8px" color="accent">
+        <mat-icon>history</mat-icon>
+      </button>
+      <button *ngIf="i.status=='Déposé' && (authService.User.Id==i.userSaisie || authService.hasrole(1))" [disabled]="loading" matTooltip="Modifier" mat-icon-button (click)="edit(i)" style="margin-top:-8px" color="accent">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button *ngIf="(i.status=='Déposé' || i.status=='Rejeté') && authService.User.Id==i.userSaisie" [disabled]="loading" matTooltip="Supprimer" mat-icon-button (click)="remove(i)" style="margin-top:-8px" color="warn">
+        <mat-icon>remove</mat-icon>
+      </button>
+      <button *ngIf="authService.hasrole(5)" [disabled]="loading" matTooltip="réinit" mat-icon-button (click)="renit(i)" style="margin-top:-8px" color="warn">
+        R
+      </button>
+    </td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <td colspan="12" style="text-align: center">
+      <div class="text-center">
+          <pagination-controls (pageChange)="p = $event" previousLabel='Precedent' nextLabel='Suivant' [responsive]='true'></pagination-controls>
+      </div>
+      </td>
+      </tfoot>
+</table>

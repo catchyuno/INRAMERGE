@@ -1,0 +1,39 @@
+<form>
+  <div class="row">
+    <div class="col-3 text-white">
+      <div class="input-group input-group-sm mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-sm">CODE</span>
+        <input type="text" [(ngModel)]="CODE" name="CODE" style="text-align:center;" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" readonly>
+      </div>
+    </div>
+    <div class="col-9 text-white">
+      <div class="input-group input-group-sm mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-sm">البنك</span>
+      <input type="text" [(ngModel)]="BANQUE_AR" name="BANQUE_AR" style="text-align:center;" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" readonly>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-10 text-white">
+      <ng-select [items]="BanqueList" name="banque" placeholder="Recherche Banque" style="text-align:center;" (clear)="choixbanquevide()" bindLabel="BANQUE_FR" [virtualScroll]="true" [(ngModel)]="banque" (change)="choixbanque()">
+        <ng-template ng-label-tmp ng-option-tmp let-item="item">
+          {{item.BANQUE_FR.replaceAll("_","'")}}
+      </ng-template>
+      </ng-select>
+    </div>
+    <div class="col-2 text-white">
+      <button (click)="updatecodebanque()" class="btn btn-primary">
+         MODIFIER
+    </button>
+      </div>
+  </div>
+<!-- <p></p> -->
+  <!-- <div class="row">
+    <div class="col-0 text-white">    
+    </div>
+  </div>
+  <p></p> -->
+  <!-- <div class="row">
+    
+  </div> -->
+</form>

@@ -1,0 +1,39 @@
+<form>
+  <div class="row">
+    <div class="col-3 text-white">
+        <div class="input-group input-group-sm mb-3">
+          <select class="form-select form-select-sm" [(ngModel)]="CATEGORIE" name="CATEGORIE" aria-label=".form-select-sm example">
+            <option value="" selected></option>
+            <option value="IND">INDEMNITE</option>
+            <option value="RET">RETENUE</option>
+            <option value="CRE">CREANCE</option>
+          </select>
+        </div>
+    </div>
+    <div class="col-2 text-white">
+      <div class="input-group input-group-sm mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-sm">CODE</span>
+         <input type="text" [(ngModel)]="CODE_RUBRIQUE" name="CODE_RUBRIQUE" style="text-align:center;" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" readonly>
+     </div>
+    </div>
+    <div class="col-7 text-white">
+      <div class="input-group input-group-sm mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-sm">RUBRIQUE</span>
+        <input type="text" name="RUBRIQUE" [(ngModel)]="RUBRIQUE" style="text-align:center;" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" readonly>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-10 text-white">
+        <div class="input-group input-group-sm mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-sm">RUBRIQUE ABBREVEE</span>
+            <input type="text" maxlength="45" onkeydown="event.returnValue=(event.keyCode===52 || event.keyCode===191 || event.keyCode===56)?false:true" oninput="this.value = this.value.toUpperCase()" name="RUBRIQUE_ABBREVEE" style="text-align:center;" [(ngModel)]="RUBRIQUE_ABBREVEE" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+        </div>
+    </div>
+    <div class="col-2 text-white">
+      <button (click)="updateSalaireRubrique()" class="btn btn-primary">
+       MODIFIER
+    </button>
+    </div>
+  </div>
+</form>

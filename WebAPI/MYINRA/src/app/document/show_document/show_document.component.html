@@ -1,0 +1,69 @@
+<style> 
+  input[type=text] {
+    width: 100%;
+    padding: 6px 10px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    background-color: #3CBC8D;
+    color: rgb(122, 29, 13);
+  }
+  </style>
+<html>
+  <div class="row">
+    <div class="col-12 text-white">
+      <input type="text" value="MISE A JOUR DES DOCUMENTS ADMINISTRATIFS" style="text-align:center;"  class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" readonly>
+    </div>
+</div> 
+  <p></p>
+  <div class="row">
+    <div class="col-4 text-white">  
+    </div>
+    <div class="col-4 text-white">
+      <div class="input-group input-group-sm mb-3">
+      <span class="input-group-text" id="inputGroup-sizing-sm">CATEGORIE</span>
+      <input type="text" style="text-align:center;" [(ngModel)]="CATEGORIE" name="CATEGORIE" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" readonly>
+    </div>
+  </div>
+  <div class="col-4 text-white">
+  </div>
+</div> 
+  <div class="container-fluid" >
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Mise à jour des documents</h5>
+            <button type="button" class="btn-close" (click)="closeClick()" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <app-add_edit_document *ngIf="modopen" [document]="this.document"> 
+            </app-add_edit_document>
+          </div>
+        </div>
+      </div>
+    </div>
+      <div class="container mt-3">
+        <table class="table table-hover" id="table"  data-show-header="true" data-pagination="true"> 
+            <thead>
+                <tr>
+                    <th>INTITULE</th>
+                    <th>FICHIER</th>
+                    <th></th>
+                    <th></th>
+                    <th><button type="button"  class="btn btn-outline-success btn-sm" data-bs-toggle="modal"  data-bs-target="#exampleModal" (click)="Adddocument()" data-backdrop="static" data-keyboard="false">Ajouter <i class="fas fa-save"  style="color:rgb(25, 236, 71)"></i></button></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let dataItem of documentList | paginate: { itemsPerPage: 8, currentPage: p }">
+                  <td>{{dataItem.INTITULE.replaceAll("_", "'")}}</td>
+                  <td><i class="fas fa-download" style="color:#00cc6a" (click)="downloadfile(dataItem)"></i></td>
+                  <td><i class="fas fa-edit" style="color:#5aa1cf" (click)="Editdocument(dataItem)" data-bs-toggle="modal"  data-bs-target="#exampleModal"></i></td>
+                  <td><i class="fas fa-trash-alt" style="color:#e95834" (click)="deletedocument(dataItem)"></i></td>  
+                </tr>
+              </tbody>
+        </table>
+      </div>
+       <p class="text-center"><pagination-controls nextLabel="Suivant" previousLabel="Précedent" (pageChange)="p = $event"></pagination-controls></p> 
+</div>
+</html>

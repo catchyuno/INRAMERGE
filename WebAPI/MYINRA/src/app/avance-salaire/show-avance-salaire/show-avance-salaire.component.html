@@ -1,0 +1,82 @@
+<!-- <script>
+  let now = new Date();
+  var dateString = moment(now).format('YYYY-MM-DD');
+</script> -->
+
+<html>
+        <div class="container-fluid" >
+    
+      <p>
+        <button type="button" class="btn btn-primary float-right m-2" data-bs-toggle="modal" data-bs-target="#exampleModal"
+(click)="AddStudent()" data-backdrop="static" data-keyboard="false">
+  Add Student
+</button>
+</p>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{modalTitle}}</h5>
+        <button type="button" class="btn-close" (click)="closeClick()" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <app-add-edit-avance-salaire>          
+        </app-add-edit-avance-salaire>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+      <div class="container mt-3">
+        <table class="table table-hover"  >
+            <thead>
+                <tr>
+                    <th>DATE</th>
+                    <th>DDP</th>
+                    <th>NOM/PRENOM</th>
+                    <th>AVANCE</th>
+                    <th>MENSUALITE</th>
+                    <th>DUREE</th>
+                    <th>DU</th>
+                    <th>AU</th>
+                    <th><button class="btn btn-primary float-right m-2" (click)="AddStudent()"><i class="fas fa-plus" style="color:#595cd8"></i></button><th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let dataItem of studentList">
+                  <td>{{dataItem.DATE_DEMANDE}}</td>
+                  <td>{{dataItem.DDP}}</td>
+                  <td>{{dataItem.NOM_PRENOM}}</td>
+                  <td>{{dataItem.AVANCE_ACCORDEE | number:'1.2-2'}}</td>
+                  <td>{{dataItem.MENS_AVANCE}}</td>
+                  <td>{{dataItem.DUREE_AVANCE}}</td>
+                  <td>{{dataItem.DU}}</td>
+                  <td>{{dataItem.AU}}</td>
+                  <td><i class="fas fa-edit" style="color:#00cc6a"></i></td>
+                  <td><i class="fas fa-trash-alt" style="color:#e95834"></i></td>
+                </tr>
+              </tbody>
+        </table>
+      </div>
+</div>
+
+
+<div class="container mt-3">
+  <table class="table table-hover"  >
+      <thead>
+          <tr>
+              <th>DDP</th>
+              <th>NOM/PRENOM</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let datapersonnel of personnelList">
+            <td>{{datapersonnel.MATRICULE}}</td>
+            <td>{{datapersonnel.NOM_PRENOM}}</td>
+          </tr>
+        </tbody>
+  </table>
+  </div>
+
+</html>

@@ -1,0 +1,95 @@
+<h3>Gestion de fournisseur</h3>
+<br>
+<mat-dialog-content>
+<div *ngIf="editable" class="row">
+    <h6>{{textadd}}</h6>
+    <br>
+    <mat-form-field class="col-md-8">
+        <input matInput type="text" [disabled]="!add" placeholder="ICE*" name="blabla" [(ngModel)]="fournisseur.ice" >
+    </mat-form-field>
+
+    <mat-form-field class="col-md-8">
+      <input matInput type="text" placeholder="Nom de société*" name="fournisseur.nomSc" [(ngModel)]="fournisseur.nomSc">
+    </mat-form-field>
+    <mat-form-field class="col-md-8">
+          <input matInput type="text" placeholder="Nom et prénom du responsable" name="fournisseur.nomResp" [(ngModel)]="fournisseur.nomResp">
+    </mat-form-field>
+    <mat-form-field class="col-md-8">
+      <input matInput type="email" placeholder="Email" name="fournisseur.email" [(ngModel)]="fournisseur.email">
+    </mat-form-field>
+    <mat-form-field class="col-md-8">
+            <input matInput type="text" placeholder="Registre de Commerce" name="fournisseur.registreCommerce"
+                    [(ngModel)]="fournisseur.registreCommerce">
+    </mat-form-field>
+
+    <mat-form-field class="col-md-8">
+            <input matInput type="text" placeholder="Raison sociale" name="fournisseur.raisonSociale"
+                    [(ngModel)]="fournisseur.raisonSociale">
+    </mat-form-field>
+
+    <mat-form-field class="col-md-8">
+            <input matInput type="text" placeholder="Id fiscale" name="fournisseur.idFiscal"
+                    [(ngModel)]="fournisseur.idFiscal">
+    </mat-form-field>
+
+      <pre>* Champs obligatoire</pre>
+                <br>
+    <div class="col-md-8">
+        <button mdbBtn size="sm" color="success" (click)="valid()" mdbWavesEffect >Valider</button>
+        <button mdbBtn color="primary" size="sm" (click)="reset()" mdbWavesEffect>Annuler</button>
+    </div>
+</div>
+<div *ngIf="!editable">
+
+  <button mdbBtn color="success" (click)="addmode()" size='sm' mdbWavesEffect >Nouveau</button>
+  <table mdbTable>
+    <thead>
+      <th>ICE</th><th>Nom de la société</th><th>Id fiscale</th><th>Raison sociale</th><th>Email</th><th>Responsable</th><th>Tel</th><th>Actions</th>
+    </thead>
+    <tbody>
+      <tr mdbTableCol *ngFor="let i of fournisseurs | paginate:{ itemsPerPage:6,currentPage:p }">
+            <td>
+              {{i.ice}}
+            </td>
+            <td>
+              {{i.nomSc}}
+            </td>
+            <td>
+              {{i.idFiscal}}
+            </td>
+            <td>
+              {{i.raisonSociale}}
+            </td>
+            <td>
+              {{i.email}}
+            </td>
+            <td>
+              {{i.nomResp}}
+            </td>
+            <td>
+              {{i.tel}}
+            </td>
+              <td>
+                <button mat-icon-button (click)="edit(i)" matTooltip="Modifier le fournisseur" color="primary">
+                      <mat-icon>edit</mat-icon>
+                </button>
+                <button *ngIf="i.idUser==null && i.marcheBcs?.length!==0 && authService.hasrole(5)" mat-icon-button (click)="remove(i)" matTooltip="Supprimer le fournisseur" color="warn">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <td colspan="8" style="text-align: center">
+          <div class="text-center">
+              <pagination-controls (pageChange)="p = $event" previousLabel='Precedent' nextLabel='Suivant'
+                  [responsive]=true></pagination-controls>
+          </div>
+      </td>
+  </tfoot>
+  </table>
+</div>
+</mat-dialog-content>
+<div class="col-md-2 offset-md-10">
+  <button type="button"   (click)="cancel()" mdbBtn size="sm" color="danger" mdbWavesEffect>fermer</button>
+</div>

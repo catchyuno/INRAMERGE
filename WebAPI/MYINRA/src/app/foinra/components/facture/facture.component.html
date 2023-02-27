@@ -1,0 +1,47 @@
+<h2 mat-dialog-title class="form-row">
+  <b>
+    <p *ngIf="!edit">Ajouter une facture/attachement</p>
+    <p *ngIf="edit">Editer facture id : {{ facture.idFacture }}</p>
+  </b>
+</h2>
+<mat-dialog-content (keydown.escape)="cancel()">
+  <div class="row justify-center">
+  <mat-form-field class="col-md-6">
+    <input matInput type="text" placeholder="Numéro de facture/attachement" maxlength="50" name="facture.numFacture"
+      [(ngModel)]="facture.numFacture" />
+  </mat-form-field>
+    <ng-select class="col-md-6" style="margin-top: -11.5px!important" [items]="Marches" [virtualScroll]="true" placeholder="Marché/BC*" bindValue="id"
+      bindLabel="nom" [(ngModel)]="facture.idMarche">
+      <ng-template ng-option-tmp let-item="item">{{ item.nom + " | " + item.iceNavigation.nomSc + " | "
+        }}{{ item.montant | number: "0.2" }} DH</ng-template>
+    </ng-select>
+  <mat-form-field class="col-md-6">
+    <input matInput type="number" placeholder="Montant facture*" name="facture.montant" [(ngModel)]="facture.montant" />
+  </mat-form-field>
+  <mat-form-field class="col-md-6">
+    <input matInput [(ngModel)]="facture.dateDepot" [matDatepicker]="picker9" placeholder="Date dépôt*" />
+    <mat-datepicker-toggle matSuffix [for]="picker9"></mat-datepicker-toggle>
+    <mat-datepicker #picker9></mat-datepicker>
+  </mat-form-field>
+  <div *ngIf="authService.User.Id == facture.userSaisie" class="col-md-12" (click)="attch()">
+    Selectionnez votre facture sous format PDF*
+    <input id="file" type="file" (change)="f($event)" style="display: none" />
+    <button mat-icon-button style="margin-top: 8px" color="primary">
+      <mat-icon>attach_file</mat-icon>
+    </button>
+    <small>
+      {{ "| " + filename + " |" }}
+    </small>
+  </div>
+  <br />
+  <pre>* Champs obligatoire</pre>
+  <div class="col-md-6 offset-md-5">
+    <button type="button" (click)="cancel()" mdbBtn size="sm" color="danger" mdbWavesEffect>
+      Annuler
+    </button>
+    <button type="button" (click)="valid()" mdbBtn size="sm" color="secondary" mdbWavesEffect>
+      Valider
+    </button>
+  </div>
+  </div>
+</mat-dialog-content>

@@ -1,0 +1,47 @@
+<html>
+  <div class="row">
+    <div class="col-1 text-white">  
+      <input type="text" name="DDP" hidden [(ngModel)]="DDP" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" readonly>
+    </div>
+    <div class="col-10 text-white">
+      <ng-select [items]="conjointList" (clear)="choixenfantvide()" name="conjoint" bindLabel="nom_prenom_conj_enf" [virtualScroll]="true"  [(ngModel)]="conjoint" (click)="refreshenfantList()">
+        <ng-template ng-label-tmp ng-option-tmp let-item="item">
+          {{item.nom_prenom_conj_enf}}
+      </ng-template>
+      </ng-select>
+    </div>
+  <div class="col-1 text-white">
+  </div>
+</div> 
+
+<div class="row">
+  <div class="col-1 text-white">  
+  </div>
+  <div class="col-10 text-white">
+    <ng-select [items]="enfantList" (clear)="choixsituationvide()" name="enfant" bindLabel="nom_prenom_conj_enf" [virtualScroll]="true"  [(ngModel)]="enfant" (click)="refreshsituationList()">
+      <ng-template ng-label-tmp ng-option-tmp let-item="item">
+        {{item.nom_prenom_conj_enf}}
+    </ng-template>
+    </ng-select>
+  </div>
+<div class="col-1 text-white">
+</div>
+</div> 
+      <div class="container mt-3">
+        <table class="table table-hover" id="table"  data-show-header="true" data-pagination="true"> 
+            <thead>
+                <tr>
+                    <th>DATE</th>
+                    <th>SITUATION</th>
+                 </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let dataItem of situationList | paginate: {id:'sitfam', itemsPerPage: 8, currentPage: ps }">
+                  <td>{{dataItem.DATE_SITUATION | date:'dd/MM/yyyy'}}</td>
+                  <td>{{dataItem.SITUATION}}</td>
+                </tr>
+              </tbody>
+        </table>
+      </div>
+       <p class="text-center"><pagination-controls id='sitfam' nextLabel="Suivant" previousLabel="Précedent" (pageChange)="ps = $event"></pagination-controls></p> 
+</html>

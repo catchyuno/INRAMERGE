@@ -1,0 +1,129 @@
+<form>
+  <div class="row">
+    <div class="col-12 text-white">
+      <ng-select [items]="AgentList" (clear)="vider()" name="agent" [readonly]="signature.DDP" placeholder="Recherche Agent" bindLabel="NOM_PRENOM" [virtualScroll]="true"  [hidden]="CATEGORIE_AGENT == 'AGENT'"  [(ngModel)]="agent" (change)="choixagent(agent)">
+        <ng-template ng-label-tmp ng-option-tmp let-item="item">
+          {{item.DDP + " : " + item.NOM_PRENOM}}
+      </ng-template>
+      </ng-select>
+    </div>
+    <p></p>
+    <div class="col-4 text-white"> 
+      <div class="input-group input-group-sm mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-sm">ORDRE</span>
+        <input type="number"  min="1" max="10" [(ngModel)]="ORDRE" name="ORDRE" style="text-align:center;" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+    </div>
+    </div>
+  </div>
+  <p></p>
+  <div class="row">
+    <div class="col-12 text-white">
+      <ng-select [items]="AgentListSIG" (clear)="viderSIG()" name="SIGNATAIRE_OBLIGATOIRE" [readonly]="signature.DDP" placeholder="Recherche Agent signatire obligatoire" bindLabel="NOM_PRENOM" [virtualScroll]="true"  [(ngModel)]="SIGNATAIRE_OBLIGATOIRE" (change)="choixagentSig(agent)">
+        <ng-template ng-label-tmp ng-option-tmp let-item="item">
+          {{item.DDP + " : " + item.NOM_PRENOM}}
+      </ng-template>
+      </ng-select>
+    </div>
+  </div>
+  <p></p>
+  <div class="row">
+    <div class="col-4 text-white">
+        <div class="input-group input-group-sm mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-sm">DDP</span>
+            <input type="text"  [(ngModel)]="DDP" name="DDP" style="text-align:center;" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" readonly>
+        </div>
+    </div>
+    <div class="col-8 text-white">
+      <div class="input-group input-group-sm mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-sm">NOM ET PRENOM</span>
+        <input type="text"  [(ngModel)]="NOM_PRENOM" style="text-align:center;" name="NOM_PRENOM" style="text-align:center;" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" readonly>
+    </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-4 text-white">
+        <div class="input-group input-group-sm mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-sm">DDP</span>
+            <input type="text"  [(ngModel)]="DDPSIG" name="DDPSIG" style="text-align:center;" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" readonly>
+        </div>
+    </div>
+    <div class="col-8 text-white">
+      <div class="input-group input-group-sm mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-sm">NOM ET PRENOM</span>
+        <input type="text"  [(ngModel)]="NOM_PRENOMSIG" style="text-align:center;" name="NOM_PRENOMSIG" style="text-align:center;" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" readonly>
+    </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-6 text-white">
+      <div class="input-group input-group-sm mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-sm">ABSENCE (DU)</span>
+        <input type="text" name="ABSENCE_DU" [(ngModel)]="ABSENCE_DU" style="text-align:center;" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+    </div>
+    </div>
+    <div class="col-6 text-white">
+        <div class="input-group input-group-sm mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-sm">ABSENCE (AU)</span>
+            <input type="text" name="ABSENCE_AU" [(ngModel)]="ABSENCE_AU" style="text-align:center;" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+        </div>
+    </div>
+  </div>
+  <div class="row">
+    <!-- <div class="col-6 text-white">
+      <input type="file" [hidden]="this.DDP_TEST=='NON'" id="upload" name="upload" accept="image/jpeg" (change)="upload($event)">    
+    </div> -->
+    <div class="col-6 text-white">
+      <select class="form-select form-select-sm" [(ngModel)]="MOTIF" name="MOTIF" aria-label=".form-select-sm example">
+        <option value="" selected></option>
+        <option value="CONGE">CONGE</option>
+        <option value="MISSION">MISSION</option>
+        <option value="AUTORISATION">AUTORISATION</option>
+        <option value="AUTORISATION">MALADIE</option>
+      </select>
+  </div>
+  </div>
+  <p></p>
+
+  <div class="row">
+    <div class="col-3 text-white">
+      <div class="input-group input-group-sm mb-3">
+      <span class="input-group-text" id="inputGroup-sizing-sm">Avec (Pour le Directeur) FR</span>
+      <input type="file" id="uploadPourFR" aria-describedby="inputGroup-sizing-sm" name="uploadPourFR" accept="image/jpeg" (change)="uploadPourFR($event)">  
+    </div>
+    </div>
+    <div class="col-3 text-white"> 
+      <div class="input-group input-group-sm mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-sm">Sans (Pour le Directeur) FR</span>
+        <input type="file" id="uploadSansFR" name="uploadSansFR" accept="image/jpeg" (change)="uploadSansFR($event)">    
+      </div>
+    </div>
+    <div class="col-3 text-white">
+      <div class="input-group input-group-sm mb-3">
+      <span class="input-group-text" id="inputGroup-sizing-sm">Avec (Pour le Directeur) AR</span>
+      <input type="file" id="uploadPourAR" aria-describedby="inputGroup-sizing-sm" name="uploadPourAR" accept="image/jpeg" (change)="uploadPourAR($event)">  
+    </div>
+    </div>
+    <div class="col-3 text-white"> 
+      <div class="input-group input-group-sm mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-sm">Sans (Pour le Directeur) AR</span>
+        <input type="file" id="uploadSansAR" name="uploadSansAR" accept="image/jpeg" (change)="uploadSansAR($event)">    
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-7 text-white">
+      <div class="input-group input-group-sm mb-3">
+          <button (click)="addsignature()" *ngIf="signature.DDP==''" class="btn btn-primary">
+          AJOUTER
+      </button>
+      <button (click)="updatesignature()" *ngIf="signature.DDP!=''" class="btn btn-primary">
+         MODIFIER
+    </button>
+      </div>
+    </div>
+  </div>
+</form>

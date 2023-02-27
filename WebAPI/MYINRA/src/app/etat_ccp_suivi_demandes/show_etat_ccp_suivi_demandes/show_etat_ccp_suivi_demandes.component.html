@@ -1,0 +1,87 @@
+<style> 
+  input[type=text] {
+    width: 100%;
+    padding: 6px 10px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    background-color: #3CBC8D;
+    color: rgb(122, 29, 13);
+  }
+  </style>
+<html>
+  <div class="row">
+    <div class="col-12 text-white">
+      <input type="text" value="SUIVI DES DEMANDES DE CERTIFICATS DE CESSATION DE PAIEMENT (CCP)" style="text-align:center;"  class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" readonly>
+    </div>
+</div> 
+  <p></p>
+  <div class="row">
+    <div class="col-4 text-white">  
+    </div>
+    <div class="col-4 text-white">
+      <select class="form-select form-select-sm" (change)="refreshAgentList()"  [(ngModel)]="STATUT" name="STATUT" aria-label=".form-select-sm example">
+        <option value="TOUS" selected>TOUS</option>
+        <option value="EN COURS">EN COURS</option>
+        <option value="TRAITE">TRAITE</option>
+      </select>
+    </div>
+  <div class="col-4 text-white">
+  </div>
+</div> 
+<p></p>
+<div class="row">
+  <div class="col-4 text-white">  
+  </div>
+  <div class="col-4 text-white">
+    <ng-select [items]="AgentList" (clear)="vider()" name="agent" placeholder="Recherche Agent" bindLabel="NOM_PRENOM" [virtualScroll]="true" [(ngModel)]="agent" (change)="refreshEtatSuiviCCPList()">
+        <ng-template ng-label-tmp ng-option-tmp let-item="item">
+          {{item.DDP + " : " + item.NOM_PRENOM}}
+      </ng-template>
+      </ng-select> 
+  </div>
+<div class="col-4 text-white">
+</div>
+</div>
+  <div class="container-fluid" >
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Upload de l'attestation CCP</h5>
+            <button type="button" class="btn-close" (click)="closeClick()" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <app-add_edit_etat_ccp_suivi_demandes *ngIf="modopen" [suiviCCP]="this.suiviCCP"> 
+            </app-add_edit_etat_ccp_suivi_demandes>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>    
+      <div class="container mt-3">
+        <table class="table table-hover" id="table"  data-show-header="true" data-pagination="true"> 
+            <thead>
+                <tr>
+                    <th>DATE</th>
+                    <th>DDP</th>
+                    <th>NOM ET PRENOM</th>
+                    <th>STATUT</th>
+                    <th>ETAT</th>
+                    <th>UPLOAD</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let dataItem of EtatSuiviCCPList | paginate: { itemsPerPage: 8, currentPage: p }">
+                  <td>{{dataItem.DATE | date:'dd/MM/yyyy'}}</td>
+                  <td>{{dataItem.DDP}}</td>
+                  <td>{{dataItem.NOM_PRENOM}}</td>
+                  <td>{{dataItem.STATUT}}</td>
+                  <td><i class="fas fa-download" style="color:#00cc6a" (click)="downloadfile(dataItem)"></i></td>
+                  <td><i class="fas fa-upload" style="color:#7e75cc" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="AddEtatSuiviCCP(dataItem)"></i></td>
+                </tr>
+              </tbody>
+        </table>
+      </div>
+      <p class="text-center"><pagination-controls nextLabel="Suivant" previousLabel="Précédent" (pageChange)="p = $event"></pagination-controls></p>
+  </html>

@@ -1,0 +1,11 @@
+td{
+    font-weight: 500;
+}
+th{
+    font-weight: 800;
+}
+.table th, .table td{
+    padding-right :0.25rem;
+    padding-left: 0.25rem;
+    text-align: center;
+}

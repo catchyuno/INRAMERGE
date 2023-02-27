@@ -1,0 +1,86 @@
+<style> 
+  input[type=text] {
+    width: 100%;
+    padding: 6px 10px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    background-color: #3CBC8D;
+    color: rgb(122, 29, 13);
+  }
+  </style>
+<html>
+  <div class="row">
+    <div class="col-12 text-white">
+      <input type="text" value="PARAMETRAGE DES RUBRIQUES DE SALAIRE" style="text-align:center;"  class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" readonly>
+    </div>
+</div> 
+  <p></p>
+  <div class="row">
+    <div class="col-4 text-white">  
+    </div>
+    <div class="col-4 text-white">
+      <select class="form-select form-select-sm" [(ngModel)]="CATEGORIE" name="CATEGORIE" aria-label=".form-select-sm example" (change)="choixcategorie()">
+        <option value="TOUS" selected>TOUS</option>
+        <option value=""></option>
+        <option value="IND">INDEMNITE</option>
+        <option value="RET">RETENUE</option>
+        <option value="CRE">CREANCE</option>
+      </select>
+    </div>
+  <div class="col-4 text-white">
+  </div>
+</div> 
+<p></p>
+<div class="row">
+  <div class="col-2 text-white">  
+  </div>
+  <div class="col-8 text-white">
+    <ng-select [items]="SalaireRubriqueList" name="rubrique" placeholder="Recherche Rubrique" (clear)="choixcategorie()" bindLabel="RUBRIQUE" [virtualScroll]="true" [(ngModel)]="rubrique" (change)="choixrubrique()">
+      <ng-template ng-label-tmp ng-option-tmp let-item="item">
+        {{item.CODE_RUBRIQUE + "  " + item.RUBRIQUE}}
+    </ng-template>
+    </ng-select>
+  </div>
+<div class="col-4 text-white">
+</div>
+</div> 
+  <div class="container-fluid" >
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Mise à jour des rubriques (Salaire)</h5>
+            <button type="button" class="btn-close" (click)="closeClick()" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <app-add_edit_salaire_rubrique *ngIf="modopen" [rubrique]="this.rubrique"> 
+            </app-add_edit_salaire_rubrique>
+          </div>
+        </div>
+      </div>
+    </div>
+      <div class="container mt-3">
+        <table class="table table-hover" id="table"  data-show-header="true" data-pagination="true"> 
+            <thead>
+                <tr>
+                    <th>CODE</th>
+                    <th>RUBRIQUE</th>
+                    <th>RUBRIQUE ABBREVEE</th>
+                    <th>TYPE</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let dataItem of SalaireRubriqueList | paginate: { itemsPerPage: 8, currentPage: p }">
+                  <td>{{dataItem.CODE_RUBRIQUE}}</td>
+                  <td>{{dataItem.RUBRIQUE.replaceAll("_", "'")}}</td>
+                  <td>{{dataItem.RUBRIQUE_ABBREVEE.replaceAll("_", "'")}}</td>
+                  <td>{{dataItem.CATEGORIE}}</td>
+                  <td><i class="fas fa-edit" style="color:#5aa1cf" (click)="EditSalaireRubrique(dataItem)" data-bs-toggle="modal"  data-bs-target="#exampleModal"></i></td>
+                </tr>
+              </tbody>
+        </table> 
+      </div>
+      <p class="text-center"><pagination-controls nextLabel="Suivant" previousLabel="Précedent" (pageChange)="p = $event"></pagination-controls></p>
+    </div>
+</html>

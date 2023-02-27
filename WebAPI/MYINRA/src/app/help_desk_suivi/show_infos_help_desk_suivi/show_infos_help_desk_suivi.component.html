@@ -1,0 +1,64 @@
+<form>
+  <div class="row">
+    <div class="col-3 text-white">
+      <div class="input-group input-group-sm mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-sm">DATE</span>
+        <input type="text" name="DATE" style="text-align:center;" [ngModel]="DATE | date:'dd/MM/yyyy'" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" readonly>
+    </div>
+    </div>
+    <div class="col-3 text-white">
+        <div class="input-group input-group-sm mb-3">
+          <span class="input-group-text" id="inputGroup-sizing-sm">DDP</span>
+          <input type="text" name="DDP" style="text-align:center;" [(ngModel)]="DDP" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" readonly>
+        </div>
+    </div>
+    <div class="col-6 text-white">
+      <div class="input-group input-group-sm mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-sm">NOM ET PRENOM</span>
+        <input type="text" name="NOM_PRENOM" style="text-align:center;" [(ngModel)]="NOM_PRENOM" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" readonly>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-3 text-white">
+      <div class="input-group input-group-sm mb-3">
+      <span class="input-group-text" id="inputGroup-sizing-sm">VOLET</span>
+      <input type="text" name="VOLET" style="text-align:center;" [ngModel]="VOLET" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" readonly>
+    </div>
+    </div>
+    <div class="col-3 text-white">
+      <div class="input-group input-group-sm mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-sm">MENU</span>
+        <input type="text" name="MENU" style="text-align:center;" [ngModel]="MENU" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" readonly>
+      </div>
+    </div>
+    <div class="col-6 text-white">
+      <div class="input-group input-group-sm mb-3">
+      <span class="input-group-text" id="inputGroup-sizing-sm">INTITULE</span>
+      <input type="text" name="INTITULE" style="text-align:center;" [(ngModel)]="INTITULE" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" readonly>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row">
+  <div class="col-12 text-white">
+    <div class="input-group input-group-sm mb-3">
+    <span class="input-group-text" id="inputGroup-sizing-sm">DESCRIPTION</span>
+    <textarea class="form-control" maxlength="250"  name="DESCRIPTION" [(ngModel)]="DESCRIPTION" rows="3" readonly></textarea>
+  </div>
+  </div>
+  <div class="col-0 text-white">
+  </div>
+</div>
+<div class="row">
+  <div class="col-12 text-white">
+    <div class="input-group input-group-sm mb-3">
+    <span class="input-group-text" id="inputGroup-sizing-sm">REPONSE</span>
+    <textarea class="form-control" maxlength="250"  name="REPONSE" [(ngModel)]="REPONSE" rows="3" readonly></textarea>
+  </div>
+  </div>
+  <div class="col-0 text-white">
+  </div>
+</div>
+</form>

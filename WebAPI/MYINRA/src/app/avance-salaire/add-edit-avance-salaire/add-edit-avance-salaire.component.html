@@ -1,0 +1,182 @@
+<!-- <div class="form-group row">
+    <label class="col-sm-2">Studnet FullName</label>
+    <div class="col-sm-10">
+        <input type="text" class="form-control" [(ngModel)]="DDP"
+        placeholder="Enter Full Name">
+    </div>
+</div>
+<div class="form-group row">
+    <label class="col-sm-2">Class</label>
+    <div class="col-sm-10">
+        <input type="text" class="form-control" [(ngModel)]="NOM_PRENOM"
+        placeholder="Enter Class">
+    </div>
+</div> -->
+
+
+
+    <!-- <div class="col-10 text-white">
+        <div class="container"> -->
+            <!-- <div class="row"> -->
+                <div class="row">
+                    <div class="col-7 text-white">
+                        <div class="input-group input-group-sm mb-3">
+                            <span class="input-group-text" id="inputGroup-sizing-sm">DATE DEMANDE</span>
+                            <input type="text"  style="text-align:center;" [ngModel]="today | date:'dd/MM/yyyy'"   class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" readonly>
+                        </div>
+                    </div>
+                    <div class="col-5 text-white">
+                        <div class="input-group input-group-sm mb-3">
+                            <span class="input-group-text" id="inputGroup-sizing-sm">DDP</span>
+                            <input type="text" (focusout)="remplirdata()" class="form-control" [(ngModel)]="DDP" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 text-white">
+                        <div class="input-group input-group-sm mb-3">
+                            <span class="input-group-text" id="inputGroup-sizing-sm">NOM ET PRENOM</span>
+                            <input type="text" style="text-align:center;" [value]="personnelList" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" readonly>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-7 text-white">
+                        <div class="input-group input-group-sm mb-3">
+                            <span class="input-group-text" id="inputGroup-sizing-sm">DATE NAISSANCE</span>
+                            <input type="text" [(ngModel)]="DATE_NAISSANCE" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" readonly>
+                        </div>
+                    </div>
+                    <div class="col-5 text-white">
+                        <div class="input-group input-group-sm mb-3">
+                            <span class="input-group-text" id="inputGroup-sizing-sm">GRADE</span>
+                            <input type="text" [(ngModel)]="GRADE" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" readonly>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 text-white">
+                        <div class="input-group input-group-sm mb-3">
+                            <span class="input-group-text" id="inputGroup-sizing-sm">AFFECTATION</span>
+                            <input type="text" [(ngModel)]="AFFECTATION" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" readonly>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6 text-white">
+                        <div class="input-group input-group-sm mb-3">
+                            <span class="input-group-text" id="inputGroup-sizing-sm">BASE CALCUL</span>
+                            <input type="text" [(ngModel)]="BASE_CALCUL" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" readonly>
+                        </div>
+                    </div>
+                    <div class="col-6 text-white">
+                        <div class="input-group input-group-sm mb-3">
+                            <span class="input-group-text" id="inputGroup-sizing-sm">SALAIRE NET</span>
+                            <input type="text" [(ngModel)]="SALAIRE_NET" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" readonly>
+                        </div>
+                    </div>
+                </div>   
+                <div class="row"> 
+                    <div class="col-6 text-white">
+                        <div class="input-group input-group-sm mb-3">
+                            <span class="input-group-text" id="inputGroup-sizing-sm">CREANCES</span>
+                            <input type="text" [(ngModel)]="TOT_CREANCES" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" readonly>
+                        </div>
+                    </div>
+                    <div class="col-6 text-white">
+                        <div class="input-group input-group-sm mb-3">
+                            <span class="input-group-text" id="inputGroup-sizing-sm">VIREMENT</span>
+                            <input type="text" [(ngModel)]="VIREMENT" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" readonly>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6 text-white">
+                        <div class="input-group input-group-sm mb-3">
+                            <span class="input-group-text" id="inputGroup-sizing-sm">MONTANT D/DE</span>
+                            <input type="text" [(ngModel)]="MT_DEMANDE" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                        </div>
+                    </div>
+                    <div class="col-6 text-white">
+                        <div class="input-group input-group-sm mb-3">
+                            <span class="input-group-text" id="inputGroup-sizing-sm">MENS. POSSIBLE</span>
+                            <input type="text" [(ngModel)]="MENS_POSSIBLE" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" readonly>
+                        </div>
+                    </div>
+                </div>   
+                <div class="row">
+                    <div class="col-6 text-white">
+                        <div class="input-group input-group-sm mb-3">
+                            <span class="input-group-text" id="inputGroup-sizing-sm">AVANCE ACC.</span>
+                            <input type="text" [(ngModel)]="AVANCE_ACCORDEE" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" readonly>
+                        </div>
+                    </div>
+                    <div class="col-6 text-white">
+                        <div class="input-group input-group-sm mb-3">
+                            <span class="input-group-text" id="inputGroup-sizing-sm">MENS. AVANCE</span>
+                            <input type="text" [(ngModel)]="MENS_AVANCE" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                        </div>
+                    </div>
+                </div>
+
+            <div class="row" >
+                <div class="col-3 text-white">
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">DUREE</span>
+                        <input type="text" [(ngModel)]="DUREE_AVANCE" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                    </div>
+                </div>
+                <div class="col-3 text-white">
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">DU</span>
+                        <input type="text" [(ngModel)]="DU" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                    </div>
+                </div>
+                <div class="col-3 text-white">
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">AU</span>
+                        <input type="text" [(ngModel)]="AU" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                    </div>
+                </div>
+                <div class="col-3 text-white">
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">VALIDE</span>
+                        <input type="text" [(ngModel)]="VALIDE" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" >
+                <div class="col-13 text-white">
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">JUSTIFICATIF (NON)</span>
+                        <input type="text" [(ngModel)]="JUSTIF_NON" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                    </div>
+                </div>
+            <!-- </div>
+        </div> -->
+
+ <button (click)="addStudent()" class="btn btn-primary">
+    Add
+</button>
+
+<div class="container mt-3">
+    <table class="table table-hover"  >
+        <thead>
+            <tr>
+                <th>DDP</th>
+                <th>NOM/PRENOM</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let datapersonnel of personnelList">
+              <td></td>
+              <td>{{datapersonnel.NOM_PRENOM}}</td>
+            </tr>
+          </tbody>
+    </table>
+    </div>
+<!-- <button (click)="updateStudent()" *ngIf="student.StudentId!=0" class="btn btn-primary">
+    Update
+</button>  -->

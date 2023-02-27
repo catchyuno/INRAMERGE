@@ -1,0 +1,97 @@
+<h1>Gestion d'utilisateur</h1>
+<div *ngIf="editable">
+    <h3>{{textadd}}</h3>
+    <mat-form-field class="col-md-4">
+        <input matInput type="text" placeholder="Nom d'utilisateur" name="blabla" [(ngModel)]="user.UserName" >
+    </mat-form-field>
+    <br>
+    <div class="col-md-4">
+      <ng-select style="margin-top:-11.5px" [items]="agents" appendTo="div" [virtualScroll]="true" (change)="ddps()" placeholder="Agent" bindLabel="nom" [(ngModel)]="agentselect" >
+      </ng-select>
+    </div>
+    <br>
+    <mat-form-field class="col-md-4">
+            <input matInput type="email" placeholder="Email" name="user.email" [(ngModel)]="user.Email" >
+    </mat-form-field>
+    <br>
+    <mat-form-field class="col-md-4">
+            <input matInput type="password" placeholder="Mot de passe" name="ssaaas" [(ngModel)]="user.password" >
+        </mat-form-field>
+        <br>
+    <mat-form-field class="col-md-4">
+            <input matInput type="password" placeholder="Confimer mot de passe" name="cpassword" [(ngModel)]="cpassword" >
+      </mat-form-field>
+      <br>
+      <mat-form-field class="col-md-4">
+          <mat-select placeholder="Role" [(value)]="user.Access" multiple>
+                  <mat-option value="Foinra">Foinra</mat-option>
+                  <mat-option value="Paie">Paie</mat-option>
+                  <mat-option [value]="3">TP</mat-option>
+                  <mat-option [value]="4">Service/Unité</mat-option>
+                  <mat-option [value]="5">Administrateur</mat-option>
+                  <mat-option [value]="6">Exploitation</mat-option>
+                  <mat-option [value]="0">Unique</mat-option>
+          </mat-select>
+      </mat-form-field>
+            <br>
+
+      <div class="col-md-4">
+        <ng-select style="margin-top:-11.5px" [items]="classes" appendTo="div" [virtualScroll]="true" placeholder="Centre" bindValue="CLASSE" bindLabel="LIBAFFEC" [(ngModel)]="user.class" >
+        </ng-select>
+      </div>
+
+      <br>
+      <div class="col-md-4">
+        <ng-select style="margin-top:-11.5px" [items]="unites" appendTo="div" [virtualScroll]="true" placeholder="Unité/Service concerné" bindValue="UNITE" bindLabel="LIBAFFEC" [(ngModel)]="user.unite" >
+        </ng-select>
+      </div>
+                <br>
+    <div class="col-md-4">
+        <button mdbBtn color="success" (click)="valid()" mdbWavesEffect >Valider</button>
+        <button mdbBtn color="primary" (click)="reset()" mdbWavesEffect>Annuler</button>
+    </div>
+</div>
+<div *ngIf="!editable">
+
+  <button mdbBtn color="success" (click)="addmode()" size='sm' mdbWavesEffect >Nouveau</button>
+  <table mdbTable>
+    <thead>
+      <th>Nom d'utilisateur</th><th>Nom et prénom</th><th>Email</th><th>Centre</th><th>Unité</th><th>Action</th>
+    </thead>
+    <tbody>
+      <tr mdbTableCol *ngFor="let i of users | paginate:{ itemsPerPage:8,currentPage:p }">
+            <td>
+                <b>{{i.UserName}}</b>
+              </td>
+              <td>
+                <b>{{i.FullName}}</b>
+              </td>
+              <td>
+                <b>{{i.Email}}</b>
+              </td>
+              <td>
+                <b>{{getclasse(i.Class)}}</b>
+              </td>
+              <td>
+                <b>{{getunite(i.Unite)}}</b>
+              </td>
+              <td>
+                <button mat-icon-button (click)="edit(i)" color="primary">
+                      <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button (click)="remove(i)" color="warn">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <td colspan="7" style="text-align: center">
+          <div class="text-center">
+              <pagination-controls (pageChange)="p = $event" previousLabel='Precedent' nextLabel='Suivant'
+                  [responsive]='true'></pagination-controls>
+          </div>
+      </td>
+  </tfoot>
+  </table>
+</div>

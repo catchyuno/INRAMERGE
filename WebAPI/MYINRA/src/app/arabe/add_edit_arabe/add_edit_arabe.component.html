@@ -1,0 +1,72 @@
+<form>
+  <div class="row">
+    <div class="col-6 text-white">
+        <div class="input-group input-group-sm mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-sm">CATEGORIE</span>
+            <input type="text"  [(ngModel)]="CATEGORIE" name="CATEGORIE" style="text-align:center;" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" [readonly]="arabe.CATEGORIE">
+        </div>
+    </div>
+    <div class="col-0 text-white">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 text-white">
+        <div class="input-group input-group-sm mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-sm">GESPERS</span>
+            <input type="text"  [(ngModel)]="FRANCAIS_GESPERS" name="FRANCAIS_GESPERS" style="text-align:center;" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" readonly>
+        </div>
+    </div>
+    <div class="col-0 text-white">
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-0 text-white">
+    </div>
+    <div class="col-12 text-white">
+        <div class="input-group input-group-sm mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-sm">FRANCAIS (M)</span>
+            <input type="text" name="FRANCAIS_M" [(ngModel)]="FRANCAIS_M" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+        </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-0 text-white">
+    </div>
+    <div class="col-12 text-white">
+        <div class="input-group input-group-sm mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-sm">FRANCAIS (F)</span>
+            <input type="text" maxlength="350" [readonly]="this.CATEGORIE=='AFFECTATION'" name="FRANCAIS_F" [(ngModel)]="FRANCAIS_F" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+        </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-0 text-white">
+    </div>
+    <div class="col-12 text-white">
+      <div class="input-group input-group-sm mb-3">
+          <span class="input-group-text" id="inputGroup-sizing-sm">ARABE (M)</span>
+          <input type="text" maxlength="350" name="ARABE_M" [(ngModel)]="ARABE_M" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+      </div>
+  </div>
+  </div>
+  <div class="row">
+    <div class="col-0 text-white">
+    </div>
+    <div class="col-12 text-white">
+      <div class="input-group input-group-sm mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-sm">ARABE (F)</span>
+        <input type="text" maxlength="350" [readonly]="this.CATEGORIE=='AFFECTATION'" name="ARABE_F" [(ngModel)]="ARABE_F" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+    </div>
+  </div>
+  </div>
+  <div class="row">
+    <div class="col-7 text-white">
+      <div class="input-group input-group-sm mb-3">
+      <button (click)="updatearabe()" class="btn btn-primary">
+        MODIFIER
+    </button>
+      </div>
+    </div>
+  </div>
+</form>

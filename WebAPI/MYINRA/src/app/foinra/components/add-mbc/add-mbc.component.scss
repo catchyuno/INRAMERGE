@@ -1,0 +1,10 @@
+td{
+    font-weight: 500;
+}
+th{
+    font-weight: 800;
+}
+
+.mat-form-field-type-mat-native-select.mat-form-field-disabled .mat-form-field-infix::after, .mat-input-element:disabled {
+    color: rgb(0 ,0, 0);
+}

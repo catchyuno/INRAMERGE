@@ -1,0 +1,45 @@
+<form>
+  <div class="row">
+    <div class="col-4 text-white">
+      <div class="input-group input-group-sm mb-3">
+          <span class="input-group-text" id="inputGroup-sizing-sm">DDP</span>
+          <input type="text" [(ngModel)]="DDP" name="DDP" style="text-align:center;" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" readonly>
+        </div>
+      </div>
+    <div class="col-8 text-white">
+      <div class="input-group input-group-sm mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-sm">NOM ET PRENOM</span>
+        <input type="text" name="NOM_PRENOM" style="text-align:center;" [(ngModel)]="NOM_PRENOM" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" readonly>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-4 text-white">
+      <div class="input-group input-group-sm mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-sm">DU</span>
+        <input type="text" name="DU" [(ngModel)]="DU"  style="text-align:center;"  class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+        </div>
+      </div>
+    <div class="col-4 text-white">
+      <div class="input-group input-group-sm mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-sm">AU</span>
+        <input type="text" [(ngModel)]="AU" name="AU" style="text-align:center;" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+      </div>
+    </div>
+    <div class="col-4 text-white">
+      <div class="input-group input-group-sm mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-sm">STATUT</span>
+        <input type="text" name="STATUT" style="text-align:center;" [ngModel]="STATUT" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" readonly>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-4 text-white">
+    </div>
+    <div class="col-4 text-white">
+      <div class="input-group input-group-sm mb-3">
+        <input type="file" id="upload" name="upload" accept="application/pdf" (change)="upload($event)">
+      </div>
+    </div> 
+  </div>
+</form>

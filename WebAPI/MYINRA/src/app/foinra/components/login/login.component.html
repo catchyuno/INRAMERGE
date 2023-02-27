@@ -1,0 +1,29 @@
+<div>
+    <div>
+        <table style="margin:auto;width: 15vw;text-align: center">
+          <tr>
+            <td>
+                <mat-form-field class="full-width">
+                  <input required matInput placeholder="Nom d'utilisateur" name="username" [(ngModel)]="username">
+                </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>
+                <mat-form-field class="full-width">
+                  <input required type="password" matInput (keyup.enter)="login()" placeholder="Mot de passe" name="password" [(ngModel)]="password">
+                  <mat-hint style="text-align: center">
+                    <strong  style="color:red;font-size:12px"> {{msg}}</strong>
+                  </mat-hint>
+                </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>
+
+              <button mdbBtn [disabled]="logbutton" size="sm" color="indigo" [block]=true class="my-4"(click)="login()">Se connecter</button>
+            </td>
+          </tr>
+        </table>
+      </div>
+</div>
