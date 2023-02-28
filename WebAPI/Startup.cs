@@ -38,14 +38,9 @@ namespace WebAPI
             { 
                 c.AddPolicy(_policy, options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             });
-<<<<<<< HEAD
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "MYINRA/dist";
-=======
-            services.AddSpaStaticFiles(configuration => {
-                configuration.RootPath = "MYINRA/dist/MYINRA";
->>>>>>> 0715c55e9adb86a29d81c5cbf3c62548aca4ff72
             });
             //Json Serializer
             services.AddControllersWithViews()

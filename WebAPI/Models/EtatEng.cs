@@ -17,12 +17,9 @@ namespace WebAPI.Models
         public string CIN { get; set; }
         public string NOMAR { get; set; }
         public string ADRESSE { get; set; }
-<<<<<<< HEAD
         public string GRADE { get; set; }
         public string nom_file { get; set; }
-=======
-    public string nom_file { get; set; }
->>>>>>> 0715c55e9adb86a29d81c5cbf3c62548aca4ff72
+
     }
     public class EtatEng
     {

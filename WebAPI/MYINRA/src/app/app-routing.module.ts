@@ -29,7 +29,6 @@ import { Show_etat_engagement_suivi_demandesComponent } from './etat_engagement_
 
 import { HomeComponent } from './foinra/components/home/home.component';
 import { PresComponent } from './foinra/components/pres/pres.component';
-import { UserComponent } from './user/user.component';
 import { OutComponent } from './foinra/components/out/out.component';
 import { FoinraManagementComponent } from './foinra/components/user-management/user-management.component';
 import { MarcheBcComponent } from './foinra/components/marche-bc/marche-bc.component';
@@ -40,6 +39,7 @@ import { Show_infos_banqueComponent } from './infos_banque/show_infos_banque/sho
 import { Show_cinComponent } from './cin/show_cin/show_cin.component';
 import { Show_main_levee_suivi_demandesComponent } from './main_levee_suivi_demandes/show_main_levee_suivi_demandes/show_main_levee_suivi_demandes.component';
 import { Show_etat_domiciliation_gestionnaireComponent } from './etat_domiciliation/show_etat_domiciliation_gestionnaire/show_etat_domiciliation_gestionnaire.component';
+import { UserComponent } from './user/user.component';
 
 
 const routes: Routes = [

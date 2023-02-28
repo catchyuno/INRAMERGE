@@ -27,7 +27,7 @@ export class UserComponent implements OnInit {
     let use;
       if(this.password!=='' && this.password!==null ){
       if(this.password.length>5 && this.password==this.cpassword ){
-        use={email:this.user.email,fullName:this.user.fullName,id:this.user.id,password:this.password,role:[]};
+        use={email:this.user.email,fullName:this.user.fullName,id:this.user.Id,password:this.password,role:[]};
         this.authservice.post('update',use).subscribe((data:any)=>{
           if(data.success){
             this.authservice.notif('Vos modification ont été enregistrer','alert-success');

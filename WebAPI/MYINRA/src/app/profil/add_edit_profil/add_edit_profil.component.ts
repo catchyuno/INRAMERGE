@@ -54,7 +54,6 @@ export class Add_edit_profilComponent implements OnInit {
     this.refreshAgentList();
     this.agent={DDP:this.service.userInfo.DDP ,NOM_PRENOM: this.service.userInfo.NOM_PRENOM};
     this.refreshmonprofil();
-    this.downloadfile(this.agent);
     //this.imagePath="/assets/PICS_PROFIL/" + this.agent.DDP + ".jpg";
     this.profil={
       DDP: this.agent.DDP,
@@ -148,6 +147,7 @@ export class Add_edit_profilComponent implements OnInit {
       {
         this.SITFAMILLE=""
       }
+      this.downloadfile(this.agent);
       this.ENFANTS=this.ProfilList[0]["ENFANTS"];
       this.DRECRUTE=this.datePipe.transform(this.ProfilList[0]["DRECRUTE"], 'dd/MM/yyyy');
       this.RETRAITE=this.ProfilList[0]["libtret"].toUpperCase();
