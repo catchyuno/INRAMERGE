@@ -40,6 +40,7 @@ import { Show_cinComponent } from './cin/show_cin/show_cin.component';
 import { Show_main_levee_suivi_demandesComponent } from './main_levee_suivi_demandes/show_main_levee_suivi_demandes/show_main_levee_suivi_demandes.component';
 import { Show_etat_domiciliation_gestionnaireComponent } from './etat_domiciliation/show_etat_domiciliation_gestionnaire/show_etat_domiciliation_gestionnaire.component';
 import { UserComponent } from './user/user.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 const routes: Routes = [
@@ -75,7 +76,8 @@ const routes: Routes = [
   {path:'HELPDESK', component:Show_help_deskComponent,canActivate:[AuthGuard]},
   {path:'HELPDESKSUIVI', component:Show_help_desk_suiviComponent,canActivate:[AuthGuard]},
   {path:'INFOS_BANQUE', component:Show_infos_banqueComponent,canActivate:[AuthGuard]},
-  {path:'', component:Add_edit_profilComponent,canActivate:[AuthGuard]},
+  {path:'profil', component:Add_edit_profilComponent,canActivate:[AuthGuard]},
+  {path:'',component:DashboardComponent},
   {path:'DOCS_VIEW', component:view_documentComponent,canActivate:[AuthGuard]},
   {path:'CIN', component:Show_cinComponent,canActivate:[AuthGuard]},
   {path:'SUIVI_MAIN', component:Show_main_levee_suivi_demandesComponent,canActivate:[AuthGuard]},

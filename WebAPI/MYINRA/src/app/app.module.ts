@@ -200,6 +200,7 @@ import { FilterComponent } from './foinra/components/filter/filter.component';
 import { TokenComponent } from './foinra/components/token/token.component';
 import { HotToastModule } from '@ngneat/hot-toast';
 import { UserManagementComponent } from './user-management/user-management.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 registerLocaleData(fr);
 
@@ -313,6 +314,7 @@ registerLocaleData(fr);
       FilterComponent,
       FoinraManagementComponent,
       TokenComponent,
+      DashboardComponent
    ],
   imports: [
     BrowserModule,

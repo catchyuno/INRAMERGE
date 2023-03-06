@@ -1,134 +1,27 @@
-<div class="container">
-  <div class="row centering">
-      <div class="centering">
-      <h2>MYINRA</h2>
-      </div>
-    <div class="row">
-      <br>
-      <h4 class="centering">PAIE</h4>
-      <div><br></div>
-      <div id="menu-box " class="col-md-3">
-        <div id="item" >
-          <div class="container-block">
-            <div class="block1">
-              <i class="far fa-file"></i>
-            </div>
-            <div class="block2">
-              <span>Attestation de salaire</span>
-              <p>Editer votres attestation</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div id="menu-box " class="col-md-3">
-        <div id="item" >
-          <div class="container-block">
-            <div class="block1">
-              <i class="fa fa-laptop"></i>
-            </div>
-            <div class="block2">
-              <span>System</span>
-              <p>Display, sound, notifications</p>
+
+<div *ngFor="let m of menu" class="card p-3 shadow" >
+  <div class="tab-content p-3 border bg-light" id="nav-tabContent">
+    <!-- <div class="tab-pane fade active show" id="nav-Ordre" role="tabpanel" aria-labelledby="nav-destination-tab"> -->
+      <div class="container mt-3">
+        <div class="row">
+          <!-- <br> -->
+          <h4 class="centering">{{m.title}}</h4>
+          <div><br></div>
+          <div *ngFor="let l of m.links" id="menu-box " class="col-md-3">
+            <div id="item" >
+              <div (click)="routeto(l.ext,l.link)" class="container-block">
+                <div class="block1">
+                  <i [class]="l.icon"></i>
+                </div>
+                <div class="block2">
+                  <span>{{l.name}}</span>
+                  <p>{{l.description}}</p>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
+
       </div>
-      <div id="menu-box " class="col-md-3">
-        <div id="item">
-          <div class="container-block">
-            <div class="block1">
-              <i class="fa fa-laptop"></i>
-            </div>
-            <div class="block2">
-              <span>System</span>
-              <p>Display, sound, notifications</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div id="menu-box " class="col-md-3">
-        <div id="item" >
-          <div class="container-block">
-            <div class="block1">
-              <i class="fa fa-laptop"></i>
-            </div>
-            <div class="block2">
-              <span>System</span>
-              <p>Display, sound, notifications</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div><br><br></div>
-    <div class="row">
-      <h4 class="centering">RESSOURCE HUMAINE</h4>
-      <div><br></div>
-      <div id="menu-box " class="col-md-3">
-        <div id="item" >
-          <div class="container-block">
-            <div class="block1">
-              <i class="fa fa-laptop"></i>
-            </div>
-            <div class="block2">
-              <span>System</span>
-              <p>Display, sound, notifications</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div id="menu-box " class="col-md-3">
-        <div id="item" >
-          <div class="container-block">
-            <div class="block1">
-              <i class="fa fa-laptop"></i>
-            </div>
-            <div class="block2">
-              <span>System</span>
-              <p>Display, sound, notifications</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div id="menu-box " class="col-md-3">
-        <div id="item">
-          <div class="container-block">
-            <div class="block1">
-              <i class="fa fa-laptop"></i>
-            </div>
-            <div class="block2">
-              <span>System</span>
-              <p>Display, sound, notifications</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div id="menu-box " class="col-md-3">
-        <div id="item" >
-          <div class="container-block">
-            <div class="block1">
-              <i class="fa fa-laptop"></i>
-            </div>
-            <div class="block2">
-              <span>System</span>
-              <p>Display, sound, notifications</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div id="menu-box " class="col-md-3">
-        <div id="item" >
-          <div class="container-block">
-            <div class="block1">
-              <i class="fa fa-laptop"></i>
-            </div>
-            <div class="block2">
-              <span>System</span>
-              <p>Display, sound, notifications</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <!-- </div> -->
   </div>
 </div>

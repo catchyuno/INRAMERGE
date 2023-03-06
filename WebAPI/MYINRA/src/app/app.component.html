@@ -123,7 +123,7 @@
       </div>
     </div>
 
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary" [hidden]="ACCESValeur == 'NON' && ValidationCINValeur == 'NON'">
+  <nav *ngIf="this.authService.enablenav" class="navbar navbar-expand-lg navbar-dark bg-primary" [hidden]="ACCESValeur == 'NON' && ValidationCINValeur == 'NON'">
     <div class="container-fluid">
        <!-- <a class="navbar-brand" href="#">My INRA</a> -->
      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main_nav"  aria-expanded="false" aria-label="Toggle navigation">
@@ -268,7 +268,7 @@
         <a class="nav-link  dropdown-toggle" href="#" data-bs-toggle="dropdown">Profil</a>
 
         <ul class="dropdown-menu dropdown-menu-right">
-          <li><a class="dropdown-item" routerLink="">Mon profil</a>
+          <li><a class="dropdown-item" routerLink="profil">Mon profil</a>
 
          </li>
           <li><a class="dropdown-item">Mot de Passe</a>

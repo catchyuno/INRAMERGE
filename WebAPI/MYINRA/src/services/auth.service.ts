@@ -11,6 +11,7 @@ const store=localStorage;
   providedIn: 'root'
 })
 export class AuthService {
+  enablenav=false;
   authToken:any;
   user:any;
   serv=""

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 //import { DatePipe } from '@angular/common';
 import { SharedService } from "src/app/shared.service";
 import { AuthService } from 'src/services/auth.service';
@@ -10,6 +10,7 @@ import { AuthService } from 'src/services/auth.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  navenable=false;
   title = 'MYINRA';
   modopen=false;
   CodeBanqueList:any = [];
@@ -27,7 +28,15 @@ export class AppComponent {
   // mySimpleFormat = this.pipe.transform(this.now, 'MM/dd/yyyy');
   // myShortFormat = this.pipe.transform(this.now, 'short');
  // this.CATEGORIE_AGENT=this.AgentList[0]["CATEGORIE"];
- constructor(private service: SharedService, private sharedService: SharedService,public authService:AuthService,public router:Router) {
+ constructor(private service: SharedService, private sharedService: SharedService,public authService:AuthService) {
+  console.log(location);
+
+    if(location.pathname=="/"){
+      this.authService.enablenav=false;
+    }else{
+      this.authService.enablenav=true;
+    }
+
 
   if(this.authService.loggedIn()){
     let x = JSON.parse(localStorage.getItem('user')!);

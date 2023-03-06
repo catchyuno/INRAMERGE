@@ -12,10 +12,15 @@ export class AuthGuard implements CanActivate {
 
   }
   canActivate(next:ActivatedRouteSnapshot) {
+    const path=next.routeConfig!.path;
+    if(path!="/"){
+      this.authService.enablenav=true;
+    }else{
+      this.authService.enablenav=false;
+    }
     console.log(this.authService.loggedIn());
     if (this.authService.loggedIn()) {
-      
-      const path=next.routeConfig!.path;
+
       console.log('path is:'+path);
       // if(((!this.authService.hasrole(1) && !this.authService.hasrole(5)) && path==='Marche') ||(!this.authService.hasrole(5) && path==='usermng') || (!this.authService.hasrole(1) && path==='fournisseurs') ){
       //   this.router.navigate(['factures']);
